@@ -197,8 +197,10 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
     }
     const element = $.parseHTML(`
     <div data-sender="${uid}" data-msgid="${msgId}" class="message-row {animationIn} animated" id="msg-${totalMessages}">
-        <div class="user-box ${actionClass}">${badges}${username}</div>
-        <div class="user-message ${actionClass}">${message}</div>
+        <div class="nes-container is-dark is-rounded with-title">        
+            <p class="user-box title ${actionClass}">${badges}${username}</p>
+            <p class="user-message ${actionClass}">${message}</p>
+        </div>
     </div>`);
     if (addition === "append") {
         if (hideAfter !== 999) {

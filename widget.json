@@ -5,12 +5,6 @@
       "value": "Test message",
       "group": "Test"
     },
-    "fontName": {
-      "type": "text",
-      "label": "Font name",
-      "value": "Montserrat",
-      "group": "Typography"
-    },
     "fontSize": {
       "type": "number",
       "label": "Font size",
