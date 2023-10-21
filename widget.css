@@ -25,7 +25,6 @@
     flex: 0 0 auto;
     width:100%;
     margin-bottom: 5px;
-    background-color:{{backgroundColor}};
     padding:5px;
     vertical-align: baseline;
 }
@@ -60,6 +59,45 @@
     font-style: italic;
 }
 
-.bg-select{
-    background-color:{{backgroundColor}} !important;
+.border {
+  border: 10px solid;
+  border-image-slice: 33% 33% 33% 33% fill;
+  border-image-repeat: stretch stretch;
+  image-rendering: pixelated;
+}
+
+.ff1-border {
+  border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/ff1_border.png");
+  /* border: 10px solid;
+    border-image-slice: 7 fill;
+    border-image-repeat: round;
+    image-rendering: pixelated; */
+}
+
+.ff1-filled-border {
+  border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/ff1_filled_border.png");
+  /* border: 10px solid;
+    border-image-slice: 7 fill;
+    border-image-repeat: round;
+    image-rendering: pixelated; */
+}
+
+.ff4-border {
+  border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/ff4_border.png");
+}
+
+.ff6-border {
+  border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/ff6_border.png");
+  border-image-slice: 10% 10% 10% 10% fill;
+}
+
+.ff7-border {
+  border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/ff7_border.png");
+  border-image-slice: 12% 12% 12% 12% fill;
+  image-rendering: auto;
+}
+
+.ff9-border {
+  border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/ff9_border.png");
+  border-image-slice: 12% 12% 12% 12% fill;
 }

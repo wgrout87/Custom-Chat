@@ -5,6 +5,24 @@ let animationOut = 'bounceOut';
 let hideAfter = 60;
 let hideCommands = "no";
 let ignoredUsers = [];
+
+function getFontCoordinatesObj(characterWidth, characterHeight) {
+    const fontArr = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\u007F".split('');
+    const charactersObj = {};
+    let row = 0;
+    let col = 0;
+    fontArr.forEach(character => {
+        charactersObj[character] = [row * characterWidth, col * characterHeight];
+        if (col === 7) {
+            row++;
+            col = 0;
+        } else {
+            col++
+        }
+    })
+    return charactersObj;
+};
+
 window.addEventListener('onEventReceived', function (obj) {
     if (obj.detail.event.listener === 'widget-button') {
 
@@ -197,7 +215,7 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
     }
     const element = $.parseHTML(`
     <div data-sender="${uid}" data-msgid="${msgId}" class="message-row {animationIn} animated" id="msg-${totalMessages}">
-        <div class="nes-container is-dark is-rounded with-title">        
+        <div class="border ff1-filled-border">        
             <p class="user-box title ${actionClass}">${badges}${username}</p>
             <p class="user-message ${actionClass}">${message}</p>
         </div>
