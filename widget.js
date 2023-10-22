@@ -56,7 +56,7 @@ function getFontCoordinatesObj(characterWidth, characterHeight) {
     return charactersObj;
 };
 
-function convertFont(text, desiredSize) {
+function convertFont(text, desiredSize, username = false) {
     const fontUrl = fontSettings[version].url;
     const textCharacters = text.split('');
     const characterWidth = fontSettings[version].characterWidth
@@ -67,8 +67,8 @@ function convertFont(text, desiredSize) {
         return characterInfo ? `<div style="display: inline-block; width: ${characterHeight}px; height: ${characterWidth}px; background: url(${fontUrl}) -${characterInfo[1]}px -${characterInfo[0]}px; image-rendering: crisp-edges; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>` : `<div style="display: inline-block; width: ${characterHeight}px; height: ${characterWidth}px; background: url(${fontUrl}) -${charactersObj["*"][1]}px -${charactersObj["*"][0]}px; image-rendering: crisp-edges;; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>`;
     })
     result = result.reduce((a, c) => a + c, '');
-    result = text !== " " ? `<div style="display: inline-block; height: ${(characterHeight + 10) * scale}">${result}</div>` : result;
-    console.log(result);
+    result = text !== " " ? `<div class=${username ? "username" : "message-text"} style="display: inline-block; height: ${(characterHeight + 10) * scale}">${result}</div>` : result;
+    console.log(username);
     return result;
 }
 
@@ -258,7 +258,7 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
     const element = $.parseHTML(`
     <div data-sender="${uid}" data-msgid="${msgId}" class="message-row {animationIn} animated" id="msg-${totalMessages}">
         <div class="border ${borderVersion}">        
-            <p class="user-box ${actionClass}">${badges}${convertFont(username, (scale * usernameRatio))}</p>
+            <p class="user-box ${actionClass}">${badges}${convertFont(username, (scale * usernameRatio), true)}</p>
             <p class="user-message ${actionClass}">${message}</p>
         </div>
     </div>`);

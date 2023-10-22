@@ -32,16 +32,17 @@
 .badge{
     margin-right: calc({{fontSize}}px * -2/3);
     display:{{displayBadges}};
-    height:{{fontSize}}px;
+    height: calc({{fontSize}}px * {{usernameRatio}});
 }
 
 .user-box{
     display:inline;
     font-size:{{fontSize}}px;
+    position: relative;
 }
 
-.user-box > span{
-    font-size:{{fontSize}}px;
+.username {
+    vertical-align: middle;
 }
 
 .user-message{
