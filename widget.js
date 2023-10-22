@@ -1,5 +1,5 @@
 let totalMessages = 0, messagesLimit = 0, removeSelector, addition, channelName,
-    provider, version;
+    provider, version, fontSize;
 let animationIn = 'bounceIn';
 let animationOut = 'bounceOut';
 let hideAfter = 60;
@@ -56,11 +56,14 @@ function getFontCoordinatesObj(characterWidth, characterHeight) {
     return charactersObj;
 };
 
-function convertFont(text, scale) {
+function convertFont(text, desiredSize) {
+    console.log(fontSize);
     const fontUrl = FontSettings[version].url;
     const textCharacters = text.split('');
     const characterWidth = FontSettings[version].characterWidth
     const characterHeight = FontSettings[version].characterHeight;
+    const scale = desiredSize / characterHeight;
+    console.log(scale);
     const charactersObj = getFontCoordinatesObj(characterWidth, characterHeight);
     let result = textCharacters.map(character => {
         const characterInfo = charactersObj[character];
@@ -172,6 +175,7 @@ window.addEventListener('onWidgetLoad', function (obj) {
     hideCommands = fieldData.hideCommands;
     channelName = obj.detail.channel.username;
     version = fieldData.version;
+    fontSize = fieldData.fontSize;
     fetch('https://api.streamelements.com/kappa/v2/channels/' + obj.detail.channel.id + '/').then(response => response.json()).then((profile) => {
         provider = profile.provider;
     });
@@ -229,7 +233,7 @@ function attachEmotes(message) {
                         }
                         return `<div class="emote" style="width: ${width}; height:${height}; display: inline-block; background-image: url(${url}); background-position: -${x}px -${y}px;"></div>`;
                     }
-                } else return convertFont(m, 4);
+                } else return convertFont(m, fontSize);
 
             }
         );
@@ -247,13 +251,12 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
     if (isAction) {
         actionClass = "action";
     }
-    console.log(badges);
 
     const borderVersion = version + "-border"
     const element = $.parseHTML(`
     <div data-sender="${uid}" data-msgid="${msgId}" class="message-row {animationIn} animated" id="msg-${totalMessages}">
         <div class="border ${borderVersion}">        
-            <p class="user-box ${actionClass}">${badges}${convertFont(username, 4)}</p>
+            <p class="user-box ${actionClass}">${badges}${convertFont(username, fontSize)}</p>
             <p class="user-message ${actionClass}">${message}</p>
         </div>
     </div>`);
