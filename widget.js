@@ -203,14 +203,14 @@ function attachEmotes(message) {
     return text
         .replace(
             /([^\s]*)/gi,
-            function (m, key) {
+            function (m, key, offset, string) {
                 let result = data.filter(emote => {
                     return html_encode(emote.name) === key
                 });
                 if (typeof result[0] !== "undefined") {
                     let url = result[0]['urls'][1];
                     if (provider === "twitch") {
-                        return `<img class="emote" " src="${url}"/>`;
+                        return string.trim().split(' ').length === 1 ? `<img class="emote loneEmote" " src="${url}"/>` : `<img class="emote" " src="${url}"/>`;
                     } else {
                         if (typeof result[0].coords === "undefined") {
                             result[0].coords = { x: 0, y: 0 };

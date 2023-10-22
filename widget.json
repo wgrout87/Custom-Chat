@@ -51,12 +51,6 @@
     },
     "group": "Typography"
   },
-  "textShadow": {
-    "type": "text",
-    "label": "Text shadow",
-    "value": "rgb(0, 0, 0) 1px 1px 1px",
-    "group": "Typography"
-  },
   "emoteSize": {
     "type": "number",
     "label": "Emote size",
@@ -196,7 +190,7 @@
   },
   "widgetName": {
     "type": "hidden",
-    "value": "Custom chat"
+    "value": "Final Fantasy Chat"
   },
   "widgetAuthor": {
     "type": "hidden",
@@ -208,6 +202,6 @@
   },
   "widgetUpdateUrl": {
     "type": "hidden",
-    "value": "https://github.com/StreamElements/widgets/blob/master/CustomChat/"
+    "value": "https://github.com/wgrout87/Custom-Chat"
   }
 }
