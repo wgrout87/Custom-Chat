@@ -9,8 +9,33 @@ let ignoredUsers = [];
 const FontSettings = {
     "finalFantasy1": {
         url: "https://wgrout87.github.io/Custom-Chat/assets/fonts/ff1_font.png",
-        characterHeight: 8,
         characterWidth: 8,
+        characterHeight: 8,
+    },
+    "finalFantasy2": {
+        url: "https://wgrout87.github.io/Custom-Chat/assets/fonts/ff2_font.png",
+        characterWidth: 8,
+        characterHeight: 8,
+    },
+    "finalFantasy4": {
+        url: "https://wgrout87.github.io/Custom-Chat/assets/fonts/ff4_font.png",
+        characterWidth: 8,
+        characterHeight: 8,
+    },
+    "finalFantasy6": {
+        url: "https://wgrout87.github.io/Custom-Chat/assets/fonts/ff6_font.png",
+        characterWidth: 12,
+        characterHeight: 12,
+    },
+    "finalFantasy7": {
+        url: "https://wgrout87.github.io/Custom-Chat/assets/fonts/ff7_font.png",
+        characterHeight: 12,
+        characterWidth: 12,
+    },
+    "finalFantasy9": {
+        url: "https://wgrout87.github.io/Custom-Chat/assets/fonts/ff9_font.png",
+        characterHeight: 8,
+        characterWidth: 12,
     }
 }
 
@@ -32,10 +57,11 @@ function getFontCoordinatesObj(characterWidth, characterHeight) {
 };
 
 function convertFont(text, scale) {
-    const fontUrl = "https://wgrout87.github.io/Custom-Chat/assets/fonts/ff1_font.png"
+    const fontUrl = FontSettings[version].url;
+    console.log(version, fontUrl);
     const textCharacters = text.split('');
-    const characterWidth = 8;
-    const characterHeight = 8;
+    const characterWidth = FontSettings[version].characterWidth
+    const characterHeight = FontSettings[version].characterHeight;
     const charactersObj = getFontCoordinatesObj(characterWidth, characterHeight);
     let result = textCharacters.map(character => {
         const characterInfo = charactersObj[character];
@@ -236,9 +262,10 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
         actionClass = "action";
     }
 
+    const borderVersion = version + "-border"
     const element = $.parseHTML(`
     <div data-sender="${uid}" data-msgid="${msgId}" class="message-row {animationIn} animated" id="msg-${totalMessages}">
-        <div class="border ${{ version }}-border">        
+        <div class="border ${borderVersion}">        
             <p class="user-box ${actionClass}">${badges}${convertFont(username, 4)}</p>
             <p class="user-message ${actionClass}">${message}</p>
         </div>
