@@ -57,13 +57,11 @@ function getFontCoordinatesObj(characterWidth, characterHeight) {
 };
 
 function convertFont(text, desiredSize) {
-    console.log(fontSize);
     const fontUrl = FontSettings[version].url;
     const textCharacters = text.split('');
     const characterWidth = FontSettings[version].characterWidth
     const characterHeight = FontSettings[version].characterHeight;
     const scale = desiredSize / characterHeight;
-    console.log(scale);
     const charactersObj = getFontCoordinatesObj(characterWidth, characterHeight);
     let result = textCharacters.map(character => {
         const characterInfo = charactersObj[character];

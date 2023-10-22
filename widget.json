@@ -27,8 +27,14 @@
   },
   "fontSize": {
     "type": "number",
-    "label": "Font size",
+    "label": "Font Size",
     "value": 24,
+    "group": "Typography"
+  },
+  "usernameRatio": {
+    "type": "number",
+    "label": "Username Ratio",
+    "value": 1.2,
     "group": "Typography"
   },
   "fontWeight": {
