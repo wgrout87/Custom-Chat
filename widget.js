@@ -1,12 +1,12 @@
 let totalMessages = 0, messagesLimit = 0, removeSelector, addition, channelName,
-    provider, version, fontSize, usernameRatio;
+    provider, version, fontSize, usernameRatio, scale;
 let animationIn = 'bounceIn';
 let animationOut = 'bounceOut';
 let hideAfter = 60;
 let hideCommands = "no";
 let ignoredUsers = [];
 
-const FontSettings = {
+const fontSettings = {
     "finalFantasy1": {
         url: "https://wgrout87.github.io/Custom-Chat/assets/fonts/ff1_font.png",
         characterWidth: 8,
@@ -57,17 +57,19 @@ function getFontCoordinatesObj(characterWidth, characterHeight) {
 };
 
 function convertFont(text, desiredSize) {
-    const fontUrl = FontSettings[version].url;
+    const fontUrl = fontSettings[version].url;
     const textCharacters = text.split('');
-    const characterWidth = FontSettings[version].characterWidth
-    const characterHeight = FontSettings[version].characterHeight;
-    const scale = desiredSize / characterHeight;
+    const characterWidth = fontSettings[version].characterWidth
+    const characterHeight = fontSettings[version].characterHeight;
     const charactersObj = getFontCoordinatesObj(characterWidth, characterHeight);
     let result = textCharacters.map(character => {
         const characterInfo = charactersObj[character];
-        return characterInfo ? `<p style="display: inline-block; width: ${characterHeight}px; height: ${characterWidth}px; background: url(${fontUrl}) -${characterInfo[1]}px -${characterInfo[0]}px; image-rendering: crisp-edges; transform: scale(${scale}); margin: 0 ${(scale - 1) * 4}px"></p>` : `<p style="display: inline-block; width: ${characterHeight}px; height: ${characterWidth}px; background: url(${fontUrl}) -${charactersObj["*"][1]}px -${charactersObj["*"][0]}px; image-rendering: crisp-edges;; transform: scale(${scale}); margin: 0 ${(scale - 1) * 4}px"></p>`;
+        return characterInfo ? `<div style="display: inline-block; width: ${characterHeight}px; height: ${characterWidth}px; background: url(${fontUrl}) -${characterInfo[1]}px -${characterInfo[0]}px; image-rendering: crisp-edges; transform: scale(${scale}); margin: ${(scale - 1) * 4}px"></div>` : `<div style="display: inline-block; width: ${characterHeight}px; height: ${characterWidth}px; background: url(${fontUrl}) -${charactersObj["*"][1]}px -${charactersObj["*"][0]}px; image-rendering: crisp-edges;; transform: scale(${scale}); margin: ${(scale - 1) * 4}px"></div>`;
     })
-    return result.reduce((a, c) => a + c, '');
+    result = result.reduce((a, c) => a + c, '');
+    result = text !== " " ? `<div style="display: inline-block; height: ${(characterHeight + 10) * scale}">${result}</div>` : result;
+    console.log(result);
+    return result;
 }
 
 window.addEventListener('onEventReceived', function (obj) {
@@ -175,6 +177,7 @@ window.addEventListener('onWidgetLoad', function (obj) {
     version = fieldData.version;
     fontSize = fieldData.fontSize;
     usernameRatio = fieldData.usernameRatio;
+    scale = fontSize / fontSettings[version].characterHeight;
     fetch('https://api.streamelements.com/kappa/v2/channels/' + obj.detail.channel.id + '/').then(response => response.json()).then((profile) => {
         provider = profile.provider;
     });
