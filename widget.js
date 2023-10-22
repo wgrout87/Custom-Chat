@@ -58,7 +58,6 @@ function getFontCoordinatesObj(characterWidth, characterHeight) {
 
 function convertFont(text, scale) {
     const fontUrl = FontSettings[version].url;
-    console.log(version, fontUrl);
     const textCharacters = text.split('');
     const characterWidth = FontSettings[version].characterWidth
     const characterHeight = FontSettings[version].characterHeight;
@@ -261,6 +260,7 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
     if (isAction) {
         actionClass = "action";
     }
+    console.log(badges);
 
     const borderVersion = version + "-border"
     const element = $.parseHTML(`

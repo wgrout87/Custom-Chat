@@ -85,6 +85,12 @@
     "value": "rgba(0,255,0,1)",
     "group": "Typography"
   },
+  "borderSize": {
+    "type": "number",
+    "label": "Border Size",
+    "value": 20,
+    "group": "Settings"
+  },
   "displayBadges": {
     "type": "dropdown",
     "label": "Display Badges",
