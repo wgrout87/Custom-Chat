@@ -5,6 +5,20 @@
     "value": "Test message",
     "group": "Test"
   },
+  "version": {
+    "label": "Final Fantasy Version",
+    "type": "dropdown",
+    "value": "finalFantasy1",
+    "options": {
+      "finalFantasy1": "Final Fantasy 1",
+      "finalFantasy2": "Final Fantasy 2",
+      "finalFantasy4": "Final Fantasy 4",
+      "finalFantasy6": "Final Fantasy 6",
+      "finalFantasy7": "Final Fantasy 7",
+      "finalFantasy9": "Final Fantasy 9"
+    },
+    "group": "Version"
+  },
   "fontSize": {
     "type": "number",
     "label": "Font size",

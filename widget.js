@@ -1,10 +1,18 @@
 let totalMessages = 0, messagesLimit = 0, nickColor = "user", removeSelector, addition, customNickColor, channelName,
-    provider;
+    provider, version;
 let animationIn = 'bounceIn';
 let animationOut = 'bounceOut';
 let hideAfter = 60;
 let hideCommands = "no";
 let ignoredUsers = [];
+
+const FontSettings = {
+    "finalFantasy1": {
+        url: "https://wgrout87.github.io/Custom-Chat/assets/fonts/ff1_font.png",
+        characterHeight: 8,
+        characterWidth: 8,
+    }
+}
 
 function getFontCoordinatesObj(characterWidth, characterHeight) {
     const fontArr = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\u007F".split('');
@@ -22,6 +30,19 @@ function getFontCoordinatesObj(characterWidth, characterHeight) {
     })
     return charactersObj;
 };
+
+function convertFont(text, scale) {
+    const fontUrl = "https://wgrout87.github.io/Custom-Chat/assets/fonts/ff1_font.png"
+    const textCharacters = text.split('');
+    const characterWidth = 8;
+    const characterHeight = 8;
+    const charactersObj = getFontCoordinatesObj(characterWidth, characterHeight);
+    let result = textCharacters.map(character => {
+        const characterInfo = charactersObj[character];
+        return characterInfo ? `<p style="display: inline-block; width: ${characterHeight}px; height: ${characterWidth}px; background: url(${fontUrl}) -${characterInfo[1]}px -${characterInfo[0]}px; image-rendering: crisp-edges; transform: scale(${scale}); margin: 0 ${(scale - 1) * 4}px"></p>` : `<p style="display: inline-block; width: ${characterHeight}px; height: ${characterWidth}px; background: url(${fontUrl}) -${charactersObj["*"][1]}px -${charactersObj["*"][0]}px; image-rendering: crisp-edges;; transform: scale(${scale}); margin: 0 ${(scale - 1) * 4}px"></p>`;
+    })
+    return result.reduce((a, c) => a + c, '');
+}
 
 window.addEventListener('onEventReceived', function (obj) {
     if (obj.detail.event.listener === 'widget-button') {
@@ -114,17 +135,17 @@ window.addEventListener('onEventReceived', function (obj) {
         badges += `<img alt="" src="${badge.url}" class="badge ${badge.type}-icon"> `;
     }
     let username = data.displayName + ":";
-    if (nickColor === "user") {
-        const color = data.displayColor !== "" ? data.displayColor : "#" + (md5(username).slice(26));
-        username = `<span style="color:${color}">${username}</span>`;
-    }
-    else if (nickColor === "custom") {
-        const color = customNickColor;
-        username = `<span style="color:${color}">${username}</span>`;
-    }
-    else if (nickColor === "remove") {
-        username = '';
-    }
+    // if (nickColor === "user") {
+    //     const color = data.displayColor !== "" ? data.displayColor : "#" + (md5(username).slice(26));
+    //     username = `<span style="color:${color}">${username}</span>`;
+    // }
+    // else if (nickColor === "custom") {
+    //     const color = customNickColor;
+    //     username = `<span style="color:${color}">${username}</span>`;
+    // }
+    // else if (nickColor === "remove") {
+    //     username = '';
+    // }
     addMessage(username, badges, message, data.isAction, data.userId, data.msgId);
 });
 
@@ -138,6 +159,7 @@ window.addEventListener('onWidgetLoad', function (obj) {
     customNickColor = fieldData.customNickColor;
     hideCommands = fieldData.hideCommands;
     channelName = obj.detail.channel.username;
+    version = fieldData.version;
     fetch('https://api.streamelements.com/kappa/v2/channels/' + obj.detail.channel.id + '/').then(response => response.json()).then((profile) => {
         provider = profile.provider;
     });
@@ -181,7 +203,7 @@ function attachEmotes(message) {
                         let x = parseInt(result[0].coords.x);
                         let y = parseInt(result[0].coords.y);
 
-                        let width = "{emoteSize}px";
+                        let width = "{{emoteSize}}px";
                         let height = "auto";
 
                         if (provider === "mixer") {
@@ -195,7 +217,7 @@ function attachEmotes(message) {
                         }
                         return `<div class="emote" style="width: ${width}; height:${height}; display: inline-block; background-image: url(${url}); background-position: -${x}px -${y}px;"></div>`;
                     }
-                } else return key;
+                } else return convertFont(m, 4);
 
             }
         );
@@ -213,10 +235,11 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
     if (isAction) {
         actionClass = "action";
     }
+
     const element = $.parseHTML(`
     <div data-sender="${uid}" data-msgid="${msgId}" class="message-row {animationIn} animated" id="msg-${totalMessages}">
-        <div class="border ff1-filled-border">        
-            <p class="user-box title ${actionClass}">${badges}${username}</p>
+        <div class="border ${{ version }}-border">        
+            <p class="user-box ${actionClass}">${badges}${convertFont(username, 4)}</p>
             <p class="user-message ${actionClass}">${message}</p>
         </div>
     </div>`);
