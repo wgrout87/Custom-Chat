@@ -64,7 +64,7 @@ function convertFont(text, desiredSize) {
     const charactersObj = getFontCoordinatesObj(characterWidth, characterHeight);
     let result = textCharacters.map(character => {
         const characterInfo = charactersObj[character];
-        return characterInfo ? `<div style="display: inline-block; width: ${characterHeight}px; height: ${characterWidth}px; background: url(${fontUrl}) -${characterInfo[1]}px -${characterInfo[0]}px; image-rendering: crisp-edges; transform: scale(${scale}); margin: ${(scale - 1) * 4}px"></div>` : `<div style="display: inline-block; width: ${characterHeight}px; height: ${characterWidth}px; background: url(${fontUrl}) -${charactersObj["*"][1]}px -${charactersObj["*"][0]}px; image-rendering: crisp-edges;; transform: scale(${scale}); margin: ${(scale - 1) * 4}px"></div>`;
+        return characterInfo ? `<div style="display: inline-block; width: ${characterHeight}px; height: ${characterWidth}px; background: url(${fontUrl}) -${characterInfo[1]}px -${characterInfo[0]}px; image-rendering: crisp-edges; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>` : `<div style="display: inline-block; width: ${characterHeight}px; height: ${characterWidth}px; background: url(${fontUrl}) -${charactersObj["*"][1]}px -${charactersObj["*"][0]}px; image-rendering: crisp-edges;; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>`;
     })
     result = result.reduce((a, c) => a + c, '');
     result = text !== " " ? `<div style="display: inline-block; height: ${(characterHeight + 10) * scale}">${result}</div>` : result;
@@ -235,7 +235,7 @@ function attachEmotes(message) {
                         }
                         return `<div class="emote" style="width: ${width}; height:${height}; display: inline-block; background-image: url(${url}); background-position: -${x}px -${y}px;"></div>`;
                     }
-                } else return convertFont(m, fontSize);
+                } else return convertFont(m, scale);
 
             }
         );
@@ -258,7 +258,7 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
     const element = $.parseHTML(`
     <div data-sender="${uid}" data-msgid="${msgId}" class="message-row {animationIn} animated" id="msg-${totalMessages}">
         <div class="border ${borderVersion}">        
-            <p class="user-box ${actionClass}">${badges}${convertFont(username, (fontSize * usernameRatio))}</p>
+            <p class="user-box ${actionClass}">${badges}${convertFont(username, (scale * usernameRatio))}</p>
             <p class="user-message ${actionClass}">${message}</p>
         </div>
     </div>`);
