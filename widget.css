@@ -31,6 +31,7 @@
 }
 
 .badge{
+    margin-right: calc({{fontSize}}px * -2/3);
     display:{{displayBadges}};
     height:{{fontSize}}px;
 }

@@ -1,4 +1,4 @@
-let totalMessages = 0, messagesLimit = 0, nickColor = "user", removeSelector, addition, customNickColor, channelName,
+let totalMessages = 0, messagesLimit = 0, removeSelector, addition, channelName,
     provider, version;
 let animationIn = 'bounceIn';
 let animationOut = 'bounceOut';
@@ -160,17 +160,6 @@ window.addEventListener('onEventReceived', function (obj) {
         badges += `<img alt="" src="${badge.url}" class="badge ${badge.type}-icon"> `;
     }
     let username = data.displayName + ":";
-    // if (nickColor === "user") {
-    //     const color = data.displayColor !== "" ? data.displayColor : "#" + (md5(username).slice(26));
-    //     username = `<span style="color:${color}">${username}</span>`;
-    // }
-    // else if (nickColor === "custom") {
-    //     const color = customNickColor;
-    //     username = `<span style="color:${color}">${username}</span>`;
-    // }
-    // else if (nickColor === "remove") {
-    //     username = '';
-    // }
     addMessage(username, badges, message, data.isAction, data.userId, data.msgId);
 });
 
@@ -180,8 +169,6 @@ window.addEventListener('onWidgetLoad', function (obj) {
     animationOut = fieldData.animationOut;
     hideAfter = fieldData.hideAfter;
     messagesLimit = fieldData.messagesLimit;
-    nickColor = fieldData.nickColor;
-    customNickColor = fieldData.customNickColor;
     hideCommands = fieldData.hideCommands;
     channelName = obj.detail.channel.username;
     version = fieldData.version;

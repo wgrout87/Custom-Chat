@@ -19,6 +19,12 @@
     },
     "group": "Version"
   },
+  "borderSize": {
+    "type": "number",
+    "label": "Border Size",
+    "value": 20,
+    "group": "Version"
+  },
   "fontSize": {
     "type": "number",
     "label": "Font size",
@@ -67,30 +73,6 @@
     },
     "group": "Typography"
   },
-  "nickColor": {
-    "type": "dropdown",
-    "label": "Nickname color:",
-    "value": "user",
-    "options": {
-      "user": "as on twitch",
-      "messagecolor": "same as message text",
-      "custom": "specified below",
-      "remove": "Remove username"
-    },
-    "group": "Typography"
-  },
-  "customNickColor": {
-    "type": "colorpicker",
-    "label": "Custom nickname color:",
-    "value": "rgba(0,255,0,1)",
-    "group": "Typography"
-  },
-  "borderSize": {
-    "type": "number",
-    "label": "Border Size",
-    "value": 20,
-    "group": "Settings"
-  },
   "displayBadges": {
     "type": "dropdown",
     "label": "Display Badges",
@@ -127,12 +109,6 @@
     "label": "Ignored users (comma separated)",
     "type": "text",
     "value": "StreamElements,OtherBot",
-    "group": "Settings"
-  },
-  "backgroundColor": {
-    "type": "colorpicker",
-    "label": "Background color:",
-    "value": "rgba(0,0,0,0)",
     "group": "Settings"
   },
   "animationIn": {
