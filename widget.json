@@ -51,12 +51,6 @@
     },
     "group": "Typography"
   },
-  "fontColor": {
-    "type": "colorpicker",
-    "label": "Font Color",
-    "value": "rgba(255,255,255,1)",
-    "group": "Typography"
-  },
   "textShadow": {
     "type": "text",
     "label": "Text shadow",
