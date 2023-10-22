@@ -123,6 +123,12 @@
     "value": "StreamElements,OtherBot",
     "group": "Settings"
   },
+  "backgroundColor": {
+    "type": "colorpicker",
+    "label": "Background color:",
+    "value": "rgba(0,0,0,0)",
+    "group": "Settings"
+  },
   "animationIn": {
     "type": "dropdown",
     "label": "Animation In:",
