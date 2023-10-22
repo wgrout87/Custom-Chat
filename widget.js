@@ -1,5 +1,5 @@
 let totalMessages = 0, messagesLimit = 0, removeSelector, addition, channelName,
-    provider, version, fontSize;
+    provider, version, fontSize, usernameRatio;
 let animationIn = 'bounceIn';
 let animationOut = 'bounceOut';
 let hideAfter = 60;
@@ -112,7 +112,7 @@ window.addEventListener('onEventReceived', function (obj) {
                                 description: "Verified"
                             }],
                             channel: channelName,
-                            text: "Howdy! My name is Bill and I am here to serve Kappa",
+                            text: "Howdy! My name is Bill and I am here to serve Kappa Kappa",
                             isAction: !1,
                             emotes: [{
                                 type: "twitch",
@@ -174,6 +174,7 @@ window.addEventListener('onWidgetLoad', function (obj) {
     channelName = obj.detail.channel.username;
     version = fieldData.version;
     fontSize = fieldData.fontSize;
+    usernameRatio = fieldData.usernameRatio;
     fetch('https://api.streamelements.com/kappa/v2/channels/' + obj.detail.channel.id + '/').then(response => response.json()).then((profile) => {
         provider = profile.provider;
     });
@@ -254,7 +255,7 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
     const element = $.parseHTML(`
     <div data-sender="${uid}" data-msgid="${msgId}" class="message-row {animationIn} animated" id="msg-${totalMessages}">
         <div class="border ${borderVersion}">        
-            <p class="user-box ${actionClass}">${badges}${convertFont(username, fontSize)}</p>
+            <p class="user-box ${actionClass}">${badges}${convertFont(username, (fontSize * usernameRatio))}</p>
             <p class="user-message ${actionClass}">${message}</p>
         </div>
     </div>`);
