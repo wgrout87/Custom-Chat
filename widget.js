@@ -68,7 +68,6 @@ function convertFont(text, desiredSize, username = false) {
     })
     result = result.reduce((a, c) => a + c, '');
     result = text !== " " ? `<div class=${username ? "username" : "message-text"} style="display: inline-block; height: ${(characterHeight + 10) * scale}">${result}</div>` : result;
-    console.log(username);
     return result;
 }
 
