@@ -202,17 +202,28 @@ function attachEmotes(message) {
             }
         }
     }
+    let textArr = text.trim().split(' ');
+    let emotesArr = [];
     return text
         .replace(
             /([^\s]*)/gi,
             function (m, key, offset, string) {
                 let result = data.filter(emote => {
-                    return html_encode(emote.name) === key
+                    if (html_encode(emote.name) === key) {
+                        emotesArr.push(key);
+                        return true;
+                    }
+                    return false;
                 });
+                let emotesOnly = emotesArr.length === textArr.length;
+                if (emotesOnly) emotesArr.forEach((element, index) => {
+                    if (element !== textArr[index]) emotesOnly = false;
+                })
+                let emotesClasses = emotesOnly ? "emote emotesOnly" : "emote";
                 if (typeof result[0] !== "undefined") {
                     let url = result[0]['urls'][1];
                     if (provider === "twitch") {
-                        return string.trim().split(' ').length === 1 ? `<img class="emote loneEmote" " src="${url}"/>` : `<img class="emote" " src="${url}"/>`;
+                        return string.trim().split(' ').length === 1 ? `<img class="${emotesClasses} loneEmote" " src="${url}"/>` : `<img class="${emotesClasses}" " src="${url}"/>`;
                     } else {
                         if (typeof result[0].coords === "undefined") {
                             result[0].coords = { x: 0, y: 0 };
@@ -254,22 +265,15 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
     }
 
     const borderVersion = version + "-border";
-    console.log(`
-    <div data-sender="${uid}" data-msgid="${msgId}" class="message-row {animationIn} animated" id="msg-${totalMessages}">
-        <div class="border ${borderVersion}">        
-            <div class="user-box ${actionClass}">${badges}${convertFont(username, (scale * usernameRatio), true)}</div>
-            <div class="user-message ${actionClass}">
-                    ${message}
-            </div>
-        </div>
-    </div>`)
+    const emotesOnly = /emotesOnly/gm.test(message);
+    const messageClass = emotesOnly ? "centered" : "";
     const element = $.parseHTML(`
     <div data-sender="${uid}" data-msgid="${msgId}" class="message-row {animationIn} animated" id="msg-${totalMessages}">
         <div class="border ${borderVersion}">        
             <div class="user-box ${actionClass}">${badges}${convertFont(username, (scale * usernameRatio), true)}</div>
             <div class="user-message ${actionClass}">
                 <div class="block w-auto">
-                    <div class="centered">
+                    <div class="${messageClass}">
                     ${message}
                     </div>
                 </div>

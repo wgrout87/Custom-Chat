@@ -56,8 +56,9 @@
 }
 
 .emote{
+    display: inline-block;
     height: {{emoteSize}}px;
-    vertical-align: middle;
+    vertical-align: baseline;
     background-repeat:no-repeat;
 }
 
