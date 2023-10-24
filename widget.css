@@ -51,6 +51,10 @@
     word-wrap: break-word;
 }
 
+.block {
+    display: block;
+}
+
 .emote{
     height: {{emoteSize}}px;
     vertical-align: middle;
@@ -73,7 +77,12 @@
 }
 
 .centered {
-    text-align: center !important;
+    margin: 0 auto !important;
+  	width: fit-content;
+}
+
+.w-auto {
+    width: auto;
 }
 
 .finalFantasy1-border {
