@@ -72,6 +72,10 @@
   image-rendering: pixelated;
 }
 
+.centered {
+    text-align: center !important;
+}
+
 .finalFantasy1-border {
   border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/ff1_filled_border.png");
 }

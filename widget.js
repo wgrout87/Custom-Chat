@@ -253,7 +253,14 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
         actionClass = "action";
     }
 
-    const borderVersion = version + "-border"
+    const borderVersion = version + "-border";
+    console.log(`
+    <div data-sender="${uid}" data-msgid="${msgId}" class="message-row {animationIn} animated" id="msg-${totalMessages}">
+        <div class="border ${borderVersion}">        
+            <p class="user-box ${actionClass}">${badges}${convertFont(username, (scale * usernameRatio), true)}</p>
+            <p class="user-message centered ${actionClass}">${message}</p>
+        </div>
+    </div>`);
     const element = $.parseHTML(`
     <div data-sender="${uid}" data-msgid="${msgId}" class="message-row {animationIn} animated" id="msg-${totalMessages}">
         <div class="border ${borderVersion}">        
