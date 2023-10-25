@@ -57,6 +57,8 @@ function getFontCoordinatesObj(characterWidth, characterHeight) {
 };
 
 function convertFont(text, desiredSize, username = false) {
+    // Look for special characters
+    // Probably use a switch case
     const fontUrl = fontSettings[version].url;
     const textCharacters = text.split('');
     const characterWidth = fontSettings[version].characterWidth
