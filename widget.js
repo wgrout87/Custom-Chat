@@ -186,7 +186,6 @@ window.addEventListener('onWidgetLoad', function (obj) {
     characterWidth = fontSettings[version].characterWidth;
     characterHeight = fontSettings[version].characterHeight;
     getFontCoordinatesObj(characterWidth, characterHeight);
-    console.log(charactersObj);
     fetch('https://api.streamelements.com/kappa/v2/channels/' + obj.detail.channel.id + '/').then(response => response.json()).then((profile) => {
         provider = profile.provider;
     });
@@ -279,16 +278,16 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
     const messageClass = emotesOnly ? "centered" : "";
     const element = $.parseHTML(`
     <div data-sender="${uid}" data-msgid="${msgId}" class="message-row {animationIn} animated" id="msg-${totalMessages}">
-        <div class="border ${borderVersion}">        
-            <div class="user-box ${actionClass}">${badges}${convertFont(username, (scale * usernameRatio), true)}</div>
-            <div class="user-message ${actionClass}">
-                <div class="block w-auto">
-                    <div class="${messageClass}">
-                    ${message}
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="border ${borderVersion}">        
+    <div class="user-box ${actionClass}">${badges}${convertFont(username, (scale * usernameRatio), true)}</div>
+    <div class="user-message ${actionClass}">
+    <div class="block w-auto">
+    <div class="${messageClass}">
+    ${message}
+    </div>
+    </div>
+    </div>
+    </div>
     </div>`);
     if (addition === "append") {
         if (hideAfter !== 999) {
@@ -315,7 +314,13 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
     if (totalMessages > messagesLimit) {
         removeRow();
     }
-}
+    // typewriterText(totalMessages);
+};
+
+function typewriterText(messageID) {
+    const message = document.getElementById(`msg-${totalMessages}`)
+
+};
 
 function removeRow() {
     if (!$(removeSelector).length) {
