@@ -59,8 +59,8 @@ function getFontCoordinatesObj(characterWidth, characterHeight) {
 function convertFont(text, desiredSize, username = false) {
     text = text.replaceAll('&#60;', '<')
         .replaceAll('&#34;', '"')
-        .replaceAll('&#62', '>')
-        .replaceAll('&#94', '^');
+        .replaceAll('&#62;', '>')
+        .replaceAll('&#94;', '^');
     console.log(text);
     // Look for special characters
     // Probably use a switch case
@@ -120,7 +120,7 @@ window.addEventListener('onEventReceived', function (obj) {
                                 description: "Verified"
                             }],
                             channel: channelName,
-                            text: " ! \" # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _ ` { | } ~",
+                            text: "Howdy! My name is Bill and I am here to serve Kappa",
                             isAction: !1,
                             emotes: [{
                                 type: "twitch",
