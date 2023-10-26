@@ -1,10 +1,11 @@
 let totalMessages = 0, messagesLimit = 0, removeSelector, addition, channelName,
-    provider, version, fontSize, usernameRatio, scale;
+    provider, version, fontSize, usernameRatio, scale, characterWidth, characterHeight;
 let animationIn = 'bounceIn';
 let animationOut = 'bounceOut';
 let hideAfter = 60;
 let hideCommands = "no";
 let ignoredUsers = [];
+let charactersObj = {};
 
 const fontSettings = {
     "finalFantasy1": {
@@ -41,7 +42,6 @@ const fontSettings = {
 
 function getFontCoordinatesObj(characterWidth, characterHeight) {
     const fontArr = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\u007F".split('');
-    const charactersObj = {};
     let row = 0;
     let col = 0;
     fontArr.forEach(character => {
@@ -53,7 +53,7 @@ function getFontCoordinatesObj(characterWidth, characterHeight) {
             col++
         }
     })
-    return charactersObj;
+    return;
 };
 
 function convertFont(text, desiredSize, username = false) {
@@ -61,14 +61,8 @@ function convertFont(text, desiredSize, username = false) {
         .replaceAll('&#34;', '"')
         .replaceAll('&#62;', '>')
         .replaceAll('&#94;', '^');
-    console.log(text);
-    // Look for special characters
-    // Probably use a switch case
     const fontUrl = fontSettings[version].url;
     const textCharacters = text.split('');
-    const characterWidth = fontSettings[version].characterWidth
-    const characterHeight = fontSettings[version].characterHeight;
-    const charactersObj = getFontCoordinatesObj(characterWidth, characterHeight);
     let result = textCharacters.map(character => {
         const characterInfo = charactersObj[character];
         return characterInfo ? `<div style="display: inline-block; width: ${characterHeight}px; height: ${characterWidth}px; background: url(${fontUrl}) -${characterInfo[1]}px -${characterInfo[0]}px; image-rendering: crisp-edges; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>` : `<div style="display: inline-block; width: ${characterHeight}px; height: ${characterWidth}px; background: url(${fontUrl}) -${charactersObj["*"][1]}px -${charactersObj["*"][0]}px; image-rendering: crisp-edges;; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>`;
@@ -184,6 +178,10 @@ window.addEventListener('onWidgetLoad', function (obj) {
     fontSize = fieldData.fontSize;
     usernameRatio = fieldData.usernameRatio;
     scale = fontSize / fontSettings[version].characterHeight;
+    characterWidth = fontSettings[version].characterWidth;
+    characterHeight = fontSettings[version].characterHeight;
+    getFontCoordinatesObj(characterWidth, characterHeight);
+    console.log(charactersObj);
     fetch('https://api.streamelements.com/kappa/v2/channels/' + obj.detail.channel.id + '/').then(response => response.json()).then((profile) => {
         provider = profile.provider;
     });
