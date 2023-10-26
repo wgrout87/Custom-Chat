@@ -7,6 +7,7 @@ let hideCommands = "no";
 let ignoredUsers = [];
 let charactersObj = {};
 
+// An object consisting of all the font settings for the final fantasy text box versions available. Character width and height is based on the sprite sheets
 const fontSettings = {
     "finalFantasy1": {
         url: "https://wgrout87.github.io/Custom-Chat/assets/fonts/ff1_font.png",
@@ -40,16 +41,19 @@ const fontSettings = {
     }
 }
 
+// This function assigns coordinates to each of the letters from the relevant sprite sheet. Coordinates are in terms of pixels and are the top left coordinate on the sprite sheet for the corresponding character
 function getFontCoordinatesObj(characterWidth, characterHeight) {
     const fontArr = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\u007F".split('');
     let row = 0;
     let col = 0;
     fontArr.forEach(character => {
         charactersObj[character] = [row * characterWidth, col * characterHeight];
+        // column 7 is the 8th (last) character in a row, after that, the row should advance, and the column return to the beginning for the new row
         if (col === 7) {
             row++;
             col = 0;
         } else {
+            // if there is still space in the current row, the column only should advance
             col++
         }
     })
@@ -57,6 +61,7 @@ function getFontCoordinatesObj(characterWidth, characterHeight) {
 };
 
 function convertFont(text, desiredSize, username = false) {
+    // Exceptions had to be made for some special characters that were coming through as unicode decimal code
     text = text.replaceAll('&#60;', '<')
         .replaceAll('&#34;', '"')
         .replaceAll('&#62;', '>')
