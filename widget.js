@@ -324,9 +324,15 @@ function typewriterText(messageID) {
         return element;
     }).flat();
     console.log(brokenDownMessage);
+    typeNextCharacter(brokenDownMessage);
+};
+
+function typeNextCharacter(arr) {
     setTimeout(() => {
-        brokenDownMessage.forEach(element => element.classList.remove("hidden"));
-    }, 2000);
+        arr[0].classList.remove("hidden");
+        arr.shift()
+        if (arr.length > 0) typeNextCharacter(arr);
+    }, 100);
 };
 
 function removeRow() {
