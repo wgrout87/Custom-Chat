@@ -61,6 +61,7 @@ function getFontCoordinatesObj(characterWidth, characterHeight) {
 };
 
 function convertFont(text, desiredSize, username = false) {
+    if (text === "") text = " ";
     // Exceptions had to be made for some special characters that were coming through as unicode decimal code
     text = text.replaceAll('&#60;', '<')
         .replaceAll('&#34;', '"')
@@ -211,53 +212,49 @@ function attachEmotes(message) {
             }
         }
     }
-    let textArr = text.trim().split(' ');
+    let trimmedTextArr = text.trim().split(' ');
     let emotesArr = [];
-    return text
-        .replace(
-            /([^\s]*)/gi,
-            function (m, key, offset, string) {
-                let result = data.filter(emote => {
-                    if (html_encode(emote.name) === key) {
-                        emotesArr.push(key);
-                        return true;
-                    }
-                    return false;
-                });
-                let emotesOnly = emotesArr.length === textArr.length;
-                if (emotesOnly) emotesArr.forEach((element, index) => {
-                    if (element !== textArr[index]) emotesOnly = false;
-                })
-                let emotesClasses = emotesOnly ? "emote emotesOnly" : "emote";
-                if (typeof result[0] !== "undefined") {
-                    let url = result[0]['urls'][1];
-                    if (provider === "twitch") {
-                        return string.trim().split(' ').length === 1 ? `<img class="${emotesClasses} loneEmote" " src="${url}"/>` : `<img class="${emotesClasses}" " src="${url}"/>`;
-                    } else {
-                        if (typeof result[0].coords === "undefined") {
-                            result[0].coords = { x: 0, y: 0 };
-                        }
-                        let x = parseInt(result[0].coords.x);
-                        let y = parseInt(result[0].coords.y);
-
-                        let width = "{{emoteSize}}px";
-                        let height = "auto";
-
-                        if (provider === "mixer") {
-                            console.log(result[0]);
-                            if (result[0].coords.width) {
-                                width = `${result[0].coords.width}px`;
-                            }
-                            if (result[0].coords.height) {
-                                height = `${result[0].coords.height}px`;
-                            }
-                        }
-                        return `<div class="emote" style="width: ${width}; height:${height}; display: inline-block; background-image: url(${url}); background-position: -${x}px -${y}px;"></div>`;
-                    }
-                } else return convertFont(m, scale);
-
+    let textArr = text.match(/([^\s]*)|([\s])/gi);
+    return textArr.map(element => {
+        let result = data.filter(emote => {
+            if (html_encode(emote.name) === element) {
+                emotesArr.push(element);
+                return true;
             }
-        );
+            return false;
+        });
+        let emotesOnly = emotesArr.length === trimmedTextArr.length;
+        if (emotesOnly) emotesArr.forEach((element, index) => {
+            if (element !== trimmedTextArr[index]) emotesOnly = false;
+        })
+        let emotesClasses = emotesOnly ? "emote emotesOnly" : "emote";
+        if (typeof result[0] !== "undefined") {
+            let url = result[0]['urls'][1];
+            if (provider === "twitch") {
+                return text.trim().split(' ').length === 1 ? `<img class="${emotesClasses} loneEmote" " src="${url}"/>` : `<img class="${emotesClasses}" " src="${url}"/>`;
+            } else {
+                if (typeof result[0].coords === "undefined") {
+                    result[0].coords = { x: 0, y: 0 };
+                }
+                let x = parseInt(result[0].coords.x);
+                let y = parseInt(result[0].coords.y);
+
+                let width = "{{emoteSize}}px";
+                let height = "auto";
+
+                if (provider === "mixer") {
+                    console.log(result[0]);
+                    if (result[0].coords.width) {
+                        width = `${result[0].coords.width}px`;
+                    }
+                    if (result[0].coords.height) {
+                        height = `${result[0].coords.height}px`;
+                    }
+                }
+                return `<div class="emote" style="width: ${width}; height:${height}; display: inline-block; background-image: url(${url}); background-position: -${x}px -${y}px;"></div>`;
+            }
+        } else return convertFont(element, scale);
+    }).reduce((a, c) => a + c, '');
 }
 
 function html_encode(e) {
@@ -314,11 +311,11 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
     if (totalMessages > messagesLimit) {
         removeRow();
     }
-    // typewriterText(totalMessages);
+    typewriterText(totalMessages);
 };
 
 function typewriterText(messageID) {
-    const message = document.getElementById(`msg-${totalMessages}`)
+    const message = document.getElementById(`msg-${totalMessages}`).getElementsByClassName("message-text");
 
 };
 
