@@ -316,7 +316,7 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
 };
 
 function typewriterText(messageID) {
-    const message = document.getElementById(`msg-${totalMessages}`).querySelectorAll(".message-text,.emote");
+    const message = document.getElementById(`msg-${messageID}`).querySelectorAll(".message-text,.emote");
     const brokenDownMessage = Object.values(message).map(element => {
         if (element.tagName === 'DIV') {
             return Object.values(element.querySelectorAll(".character"));
