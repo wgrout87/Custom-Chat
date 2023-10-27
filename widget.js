@@ -324,6 +324,9 @@ function typewriterText(messageID) {
         return element;
     }).flat();
     console.log(brokenDownMessage);
+    setTimeout(() => {
+        brokenDownMessage.forEach(element => element.classList.remove("hidden"));
+    }, 2000);
 };
 
 function removeRow() {
