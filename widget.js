@@ -69,9 +69,10 @@ function convertFont(text, desiredSize, username = false) {
         .replaceAll('&#94;', '^');
     const fontUrl = fontSettings[version].url;
     const textCharacters = text.split('');
+    const hidden = !username && text !== " " ? "hidden" : ""
     let result = textCharacters.map(character => {
         const characterInfo = charactersObj[character];
-        return characterInfo ? `<div class="character" style="display: inline-block; width: ${characterHeight}px; height: ${characterWidth}px; background: url(${fontUrl}) -${characterInfo[1]}px -${characterInfo[0]}px; image-rendering: crisp-edges; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>` : `<div class="character" style="display: inline-block; width: ${characterHeight}px; height: ${characterWidth}px; background: url(${fontUrl}) -${charactersObj["*"][1]}px -${charactersObj["*"][0]}px; image-rendering: crisp-edges;; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>`;
+        return characterInfo ? `<div class="character ${hidden}" style="display: inline-block; width: ${characterHeight}px; height: ${characterWidth}px; background: url(${fontUrl}) -${characterInfo[1]}px -${characterInfo[0]}px; image-rendering: crisp-edges; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>` : `<div class="character" style="display: inline-block; width: ${characterHeight}px; height: ${characterWidth}px; background: url(${fontUrl}) -${charactersObj["*"][1]}px -${charactersObj["*"][0]}px; image-rendering: crisp-edges;; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>`;
     })
     result = result.reduce((a, c) => a + c, '');
     result = text !== " " ? `<div class="${username ? "username" : "message-text"}" style="display: inline-block; height: ${(characterHeight + 10) * scale}">${result}</div>` : result;
@@ -227,7 +228,7 @@ function attachEmotes(message) {
         if (emotesOnly) emotesArr.forEach((element, index) => {
             if (element !== trimmedTextArr[index]) emotesOnly = false;
         })
-        let emotesClasses = emotesOnly ? "emote emotesOnly" : "emote";
+        let emotesClasses = emotesOnly ? "emote hidden emotesOnly" : "emote hidden";
         if (typeof result[0] !== "undefined") {
             let url = result[0]['urls'][1];
             if (provider === "twitch") {

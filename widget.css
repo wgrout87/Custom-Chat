@@ -114,3 +114,6 @@
   border-image-slice: 12% 12% 12% 12% fill;
 }
 
+.hidden {
+  opacity: 0;
+}
