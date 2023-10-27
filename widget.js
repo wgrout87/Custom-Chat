@@ -71,7 +71,7 @@ function convertFont(text, desiredSize, username = false) {
     const textCharacters = text.split('');
     let result = textCharacters.map(character => {
         const characterInfo = charactersObj[character];
-        return characterInfo ? `<div style="display: inline-block; width: ${characterHeight}px; height: ${characterWidth}px; background: url(${fontUrl}) -${characterInfo[1]}px -${characterInfo[0]}px; image-rendering: crisp-edges; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>` : `<div style="display: inline-block; width: ${characterHeight}px; height: ${characterWidth}px; background: url(${fontUrl}) -${charactersObj["*"][1]}px -${charactersObj["*"][0]}px; image-rendering: crisp-edges;; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>`;
+        return characterInfo ? `<div class="character" style="display: inline-block; width: ${characterHeight}px; height: ${characterWidth}px; background: url(${fontUrl}) -${characterInfo[1]}px -${characterInfo[0]}px; image-rendering: crisp-edges; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>` : `<div class="character" style="display: inline-block; width: ${characterHeight}px; height: ${characterWidth}px; background: url(${fontUrl}) -${charactersObj["*"][1]}px -${charactersObj["*"][0]}px; image-rendering: crisp-edges;; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>`;
     })
     result = result.reduce((a, c) => a + c, '');
     result = text !== " " ? `<div class="${username ? "username" : "message-text"}" style="display: inline-block; height: ${(characterHeight + 10) * scale}">${result}</div>` : result;
@@ -315,8 +315,14 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
 };
 
 function typewriterText(messageID) {
-    const message = document.getElementById(`msg-${totalMessages}`).getElementsByClassName("message-text");
-
+    const message = document.getElementById(`msg-${totalMessages}`).querySelectorAll(".message-text,.emote");
+    const brokenDownMessage = Object.values(message).map(element => {
+        if (element.tagName === 'DIV') {
+            return Object.values(element.querySelectorAll(".character"));
+        }
+        return element;
+    }).flat();
+    console.log(brokenDownMessage);
 };
 
 function removeRow() {
