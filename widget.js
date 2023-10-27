@@ -1,5 +1,4 @@
-let totalMessages = 0, messagesLimit = 0, removeSelector, addition, channelName,
-    provider, version, fontSize, usernameRatio, scale, characterWidth, characterHeight;
+let totalMessages = 0, messagesLimit = 0, removeSelector, addition, channelName, provider, version, fontSize, usernameRatio, scale, characterWidth, characterHeight, typewriter = 'true', typewriterSpeed = 100;
 let animationIn = 'bounceIn';
 let animationOut = 'bounceOut';
 let hideAfter = 60;
@@ -69,7 +68,7 @@ function convertFont(text, desiredSize, username = false) {
         .replaceAll('&#94;', '^');
     const fontUrl = fontSettings[version].url;
     const textCharacters = text.split('');
-    const hidden = !username && text !== " " ? "hidden" : ""
+    const hidden = !username && text !== " " && typewriter === "true" ? "hidden" : ""
     let result = textCharacters.map(character => {
         const characterInfo = charactersObj[character];
         return characterInfo ? `<div class="character ${hidden}" style="display: inline-block; width: ${characterHeight}px; height: ${characterWidth}px; background: url(${fontUrl}) -${characterInfo[1]}px -${characterInfo[0]}px; image-rendering: crisp-edges; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>` : `<div class="character" style="display: inline-block; width: ${characterHeight}px; height: ${characterWidth}px; background: url(${fontUrl}) -${charactersObj["*"][1]}px -${charactersObj["*"][0]}px; image-rendering: crisp-edges;; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>`;
@@ -187,6 +186,8 @@ window.addEventListener('onWidgetLoad', function (obj) {
     scale = fontSize / fontSettings[version].characterHeight;
     characterWidth = fontSettings[version].characterWidth;
     characterHeight = fontSettings[version].characterHeight;
+    typewriter = fieldData.typewriter;
+    typewriterSpeed = fieldData.typewriterSpeed;
     getFontCoordinatesObj(characterWidth, characterHeight);
     fetch('https://api.streamelements.com/kappa/v2/channels/' + obj.detail.channel.id + '/').then(response => response.json()).then((profile) => {
         provider = profile.provider;
@@ -228,7 +229,8 @@ function attachEmotes(message) {
         if (emotesOnly) emotesArr.forEach((element, index) => {
             if (element !== trimmedTextArr[index]) emotesOnly = false;
         })
-        let emotesClasses = emotesOnly ? "emote hidden emotesOnly" : "emote hidden";
+        let emotesClasses = emotesOnly ? "emote emotesOnly" : "emote";
+        if (typewriter === "true") emotesClasses += " hidden";
         if (typeof result[0] !== "undefined") {
             let url = result[0]['urls'][1];
             if (provider === "twitch") {
@@ -312,7 +314,15 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
     if (totalMessages > messagesLimit) {
         removeRow();
     }
-    typewriterText(totalMessages);
+    if (typewriter === "true") typewriterText(totalMessages);
+};
+
+function typeNextCharacter(arr) {
+    setTimeout(() => {
+        arr[0].classList.remove("hidden");
+        arr.shift()
+        if (arr.length > 0) typeNextCharacter(arr);
+    }, typewriterSpeed);
 };
 
 function typewriterText(messageID) {
@@ -323,16 +333,7 @@ function typewriterText(messageID) {
         }
         return element;
     }).flat();
-    console.log(brokenDownMessage);
     typeNextCharacter(brokenDownMessage);
-};
-
-function typeNextCharacter(arr) {
-    setTimeout(() => {
-        arr[0].classList.remove("hidden");
-        arr.shift()
-        if (arr.length > 0) typeNextCharacter(arr);
-    }, 100);
 };
 
 function removeRow() {

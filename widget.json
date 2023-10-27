@@ -188,6 +188,22 @@
     },
     "group": "Settings"
   },
+  "typewriter": {
+    "label": "Typewriter",
+    "type": "dropdown",
+    "value": "true",
+    "options": {
+      "true": "On",
+      "false": "Off"
+    },
+    "group": "Settings"
+  },
+  "typewriterSpeed": {
+    "type": "number",
+    "label": "Typewriter Speed (in milliseconds)",
+    "value": 100,
+    "group": "Settings"
+  },
   "widgetName": {
     "type": "hidden",
     "value": "Final Fantasy Chat"
