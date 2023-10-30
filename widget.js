@@ -1,4 +1,4 @@
-let totalMessages = 0, messagesLimit = 0, removeSelector, addition, channelName, provider, version, fontSize, usernameRatio, scale, characterWidth, characterHeight, typewriter = 'true', typewriterSpeed = 100;
+let totalMessages = 0, messagesLimit = 0, removeSelector, addition, channelName, provider, version, fontSize, usernameRatio, scale, characterHeight, characterWidth, typewriter = 'true', typewriterSpeed = 100;
 let animationIn = 'bounceIn';
 let animationOut = 'bounceOut';
 let hideAfter = 60;
@@ -10,23 +10,23 @@ let charactersObj = {};
 const fontSettings = {
     "standard": {
         url: "https://wgrout87.github.io/Custom-Chat/assets/fonts/smrpg_light_font.png",
-        characterWidth: 8,
         characterHeight: 15,
+        characterWidth: 8,
     },
     "pipe": {
         url: "https://wgrout87.github.io/Custom-Chat/assets/fonts/smrpg_dark_font.png",
-        characterWidth: 8,
         characterHeight: 15,
+        characterWidth: 8,
     },
 }
 
 // This function assigns coordinates to each of the letters from the relevant sprite sheet. Coordinates are in terms of pixels and are the top left coordinate on the sprite sheet for the corresponding character
-function getFontCoordinatesObj(characterWidth, characterHeight) {
+function getFontCoordinatesObj(characterHeight, characterWidth) {
     const fontArr = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\u007F".split('');
     let row = 0;
     let col = 0;
     fontArr.forEach(character => {
-        charactersObj[character] = [row * characterWidth, col * characterHeight];
+        charactersObj[character] = [row * characterHeight, col * characterWidth];
         // column 7 is the 8th (last) character in a row, after that, the row should advance, and the column return to the beginning for the new row
         if (col === 7) {
             row++;
@@ -51,10 +51,10 @@ function convertFont(text, desiredSize, username = false) {
     const hidden = !username && text !== " " && typewriter === "true" ? "hidden" : ""
     let result = textCharacters.map(character => {
         const characterInfo = charactersObj[character];
-        return characterInfo ? `<div class="character ${hidden}" style="display: inline-block; width: ${characterHeight}px; height: ${characterWidth}px; background: url(${fontUrl}) -${characterInfo[1]}px -${characterInfo[0]}px; image-rendering: crisp-edges; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>` : `<div class="character" style="display: inline-block; width: ${characterHeight}px; height: ${characterWidth}px; background: url(${fontUrl}) -${charactersObj["*"][1]}px -${charactersObj["*"][0]}px; image-rendering: crisp-edges;; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>`;
+        return characterInfo ? `<div class="character ${hidden}" style="display: inline-block; width: ${characterWidth}px; height: ${characterHeight}px; background: url(${fontUrl}) -${characterInfo[1]}px -${characterInfo[0]}px; image-rendering: crisp-edges; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>` : `<div class="character" style="display: inline-block; width: ${characterWidth}px; height: ${characterHeight}px; background: url(${fontUrl}) -${charactersObj["*"][1]}px -${charactersObj["*"][0]}px; image-rendering: crisp-edges;; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>`;
     })
     result = result.reduce((a, c) => a + c, '');
-    result = text !== " " ? `<div class="${username ? "username" : "message-text"}" style="display: inline-block; height: ${(characterHeight + 10) * scale}">${result}</div>` : result;
+    result = text !== " " ? `<div class="${username ? "username" : "message-text"}" style="display: inline-block; height: ${(characterWidth + 10) * scale}">${result}</div>` : result;
     return result;
 }
 
@@ -163,12 +163,12 @@ window.addEventListener('onWidgetLoad', function (obj) {
     version = fieldData.version;
     fontSize = fieldData.fontSize;
     usernameRatio = fieldData.usernameRatio;
-    scale = fontSize / fontSettings[version].characterHeight;
-    characterWidth = fontSettings[version].characterWidth;
+    scale = fontSize / fontSettings[version].characterWidth;
     characterHeight = fontSettings[version].characterHeight;
+    characterWidth = fontSettings[version].characterWidth;
     typewriter = fieldData.typewriter;
     typewriterSpeed = fieldData.typewriterSpeed;
-    getFontCoordinatesObj(characterWidth, characterHeight);
+    getFontCoordinatesObj(characterHeight, characterWidth);
     fetch('https://api.streamelements.com/kappa/v2/channels/' + obj.detail.channel.id + '/').then(response => response.json()).then((profile) => {
         provider = profile.provider;
     });
