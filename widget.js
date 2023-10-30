@@ -8,36 +8,16 @@ let charactersObj = {};
 
 // An object consisting of all the font settings for the final fantasy text box versions available. Character width and height is based on the sprite sheets
 const fontSettings = {
-    "finalFantasy1": {
-        url: "https://wgrout87.github.io/Custom-Chat/assets/fonts/ff1_font.png",
+    "standard": {
+        url: "https://wgrout87.github.io/Custom-Chat/assets/fonts/smrpg_light_font.png",
         characterWidth: 8,
-        characterHeight: 8,
+        characterHeight: 15,
     },
-    "finalFantasy2": {
-        url: "https://wgrout87.github.io/Custom-Chat/assets/fonts/ff2_font.png",
+    "pipe": {
+        url: "https://wgrout87.github.io/Custom-Chat/assets/fonts/smrpg_dark_font.png",
         characterWidth: 8,
-        characterHeight: 8,
+        characterHeight: 15,
     },
-    "finalFantasy4": {
-        url: "https://wgrout87.github.io/Custom-Chat/assets/fonts/ff4_font.png",
-        characterWidth: 8,
-        characterHeight: 8,
-    },
-    "finalFantasy6": {
-        url: "https://wgrout87.github.io/Custom-Chat/assets/fonts/ff6_font.png",
-        characterWidth: 12,
-        characterHeight: 12,
-    },
-    "finalFantasy7": {
-        url: "https://wgrout87.github.io/Custom-Chat/assets/fonts/ff7_font.png",
-        characterHeight: 12,
-        characterWidth: 12,
-    },
-    "finalFantasy9": {
-        url: "https://wgrout87.github.io/Custom-Chat/assets/fonts/ff9_font.png",
-        characterHeight: 8,
-        characterWidth: 12,
-    }
 }
 
 // This function assigns coordinates to each of the letters from the relevant sprite sheet. Coordinates are in terms of pixels and are the top left coordinate on the sprite sheet for the corresponding character

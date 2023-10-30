@@ -86,32 +86,12 @@
     width: auto;
 }
 
-.finalFantasy1-border {
-  border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/ff1_filled_border.png");
+.smrpg-border {
+  border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/smrpg_border.png");
 }
 
-.finalFantasy2-border {
-  border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/ff1_border.png");
-}
-
-.finalFantasy4-border {
-  border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/ff4_border.png");
-}
-
-.finalFantasy6-border {
-  border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/ff6_border.png");
-  border-image-slice: 10% 10% 10% 10% fill;
-}
-
-.finalFantasy7-border {
-  border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/ff7_border.png");
-  border-image-slice: 12% 12% 12% 12% fill;
-  image-rendering: auto;
-}
-
-.finalFantasy9-border {
-  border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/ff9_border.png");
-  border-image-slice: 12% 12% 12% 12% fill;
+.smrpg-pipe-border {
+  border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/smrpg_pipe_border.png");
 }
 
 .hidden {
