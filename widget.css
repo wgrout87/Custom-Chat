@@ -72,7 +72,7 @@
 
 .border {
   border: {{borderSize}}px solid;
-  border-image-slice: 33% 33% 33% 33% fill;
+  border-image-slice: 4% 4% 4% 4% fill;
   border-image-repeat: stretch stretch;
   image-rendering: pixelated;
 }
