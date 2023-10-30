@@ -86,11 +86,11 @@
     width: auto;
 }
 
-.smrpg-border {
+.standard-border {
   border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/smrpg_border.png");
 }
 
-.smrpg-pipe-border {
+.pipe-border {
   border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/smrpg_pipe_border.png");
 }
 
