@@ -1,4 +1,4 @@
-let totalMessages = 0, messagesLimit = 0, removeSelector, addition, channelName, provider, version, fontSize, usernameRatio, scale, characterHeight, characterWidth, typewriter = 'true', typewriterSpeed = 100;
+let totalMessages = 0, messagesLimit = 0, removeSelector, addition, channelName, provider, version, fontSize, usernameRatio, scale, characterHeight, characterWidth, typewriter = 'true', typewriterSpeed = 100, justifyMessages;
 let animationIn = 'bounceIn';
 let animationOut = 'bounceOut';
 let hideAfter = 60;
@@ -188,6 +188,7 @@ window.addEventListener('onWidgetLoad', function (obj) {
     characterWidth = fontSettings[version].characterWidth;
     typewriter = fieldData.typewriter;
     typewriterSpeed = fieldData.typewriterSpeed;
+    justifyMessages = fieldData.justifyMessages;
     getFontCoordinatesObj(characterHeight, characterWidth);
     fetch('https://api.streamelements.com/kappa/v2/channels/' + obj.detail.channel.id + '/').then(response => response.json()).then((profile) => {
         provider = profile.provider;

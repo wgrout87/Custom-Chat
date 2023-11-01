@@ -67,6 +67,17 @@
     },
     "group": "Typography"
   },
+  "justifyMessages": {
+    "label": "Justify Messages",
+    "type": "dropdown",
+    "value": "left",
+    "options": {
+      "justify-left": "Left",
+      "justify-right": "Right",
+      "justify-center": "Center"
+    },
+    "group": "Typography"
+  },
   "displayBadges": {
     "type": "dropdown",
     "label": "Display Badges",

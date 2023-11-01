@@ -29,6 +29,14 @@
     vertical-align: baseline;
 }
 
+.justify-right{
+  align-content: flex-end;
+}
+
+.justify-center{
+  margin: 0 auto !important;
+}
+
 .badge{
     margin-right: calc({{fontSize}}px * -2/3);
     display:{{displayBadges}};
