@@ -278,7 +278,7 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
     const emotesOnly = /emotesOnly/gm.test(message);
     const messageClass = emotesOnly ? "centered" : "";
     const element = $.parseHTML(`
-    <div data-sender="${uid}" data-msgid="${msgId}" class="message-row {animationIn} animated" id="msg-${totalMessages}">
+    <div data-sender="${uid}" data-msgid="${msgId}" class="message-row {animationIn} animated ${justifyMessages}" id="msg-${totalMessages}">
     <div class="border ${borderVersion}">        
     <div class="user-box ${actionClass}">${badges}${convertFont(username, (scale * usernameRatio), true)}</div>
     <div class="user-message ${actionClass}">
@@ -290,6 +290,7 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
     </div>
     </div>
     </div>`);
+    console.log(element.classList);
     if (addition === "append") {
         if (hideAfter !== 999) {
             $(element).appendTo('.main-container').delay(hideAfter * 1000).queue(function () {

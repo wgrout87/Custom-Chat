@@ -34,7 +34,8 @@
 }
 
 .justify-center{
-  margin: 0 auto !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 .badge{
