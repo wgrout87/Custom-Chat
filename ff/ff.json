@@ -76,11 +76,21 @@
   "justifyMessages": {
     "label": "Justify Messages",
     "type": "dropdown",
-    "value": "left",
+    "value": "Left",
     "options": {
       "justify-left": "Left",
       "justify-right": "Right",
       "justify-center": "Center"
+    },
+    "group": "Typography"
+  },
+  "fitContent": {
+    "label": "Message Width",
+    "type": "dropdown",
+    "value": "Shrink",
+    "options": {
+      "fit-content": "Shrink",
+      "fill-width": "Fill"
     },
     "group": "Typography"
   },

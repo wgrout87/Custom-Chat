@@ -23,10 +23,13 @@
 
 .message-row{
     flex: 0 0 auto;
-    width:fit-content;
     margin-bottom: 5px;
     padding:5px;
     vertical-align: baseline;
+}
+
+.fill-width{
+  width: 100%;
 }
 
 .justify-right{
