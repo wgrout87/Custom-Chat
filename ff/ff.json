@@ -1,4 +1,10 @@
 {
+  "testMessageText": {
+    "label": "Test Message Text",
+    "type": "text",
+    "value": "Howdy! My name is Bill and I am here to serve Kappa",
+    "group": "Test"
+  },
   "testMessage": {
     "type": "button",
     "label": "Test message",
