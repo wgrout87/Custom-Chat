@@ -30,7 +30,8 @@
 }
 
 .justify-right{
-  align-content: flex-end;
+  margin-left: auto !important;
+  margin-right: 0 !important;
 }
 
 .justify-center{
