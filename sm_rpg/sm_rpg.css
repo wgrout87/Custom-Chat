@@ -21,9 +21,22 @@
     box-sizing: border-box;
 }
 
+.fill-width{
+  width: 100%;
+}
+
+.justify-right{
+  margin-left: auto !important;
+  margin-right: 0 !important;
+}
+
+.justify-center{
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
 .message-row{
     flex: 0 0 auto;
-    width:fit-content;
     margin-bottom: 5px;
     padding:5px;
     vertical-align: baseline;
