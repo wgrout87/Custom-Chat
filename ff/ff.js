@@ -340,7 +340,7 @@ function typewriterText(messageID) {
         }
         return element;
     }).flat();
-    typeNextCharacter(brokenDownMessage, `msg-${messageID}`);
+    setTimeout(() => typeNextCharacter(brokenDownMessage, `msg-${messageID}`), animationIn !== "none" ? 200 : 0);
 };
 
 function removeRow() {
