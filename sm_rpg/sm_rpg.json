@@ -1,4 +1,10 @@
 {
+  "testMessageText": {
+    "label": "Test Message Text",
+    "type": "text",
+    "value": "Howdy! My name is Bill and I am here to serve Kappa",
+    "group": "Test"
+  },
   "testMessage": {
     "type": "button",
     "label": "Test message",
@@ -60,6 +66,27 @@
     "options": {
       "flex": "Bottom",
       "block": "Top"
+    },
+    "group": "Typography"
+  },
+  "justifyMessages": {
+    "label": "Justify Messages",
+    "type": "dropdown",
+    "value": "Left",
+    "options": {
+      "justify-left": "Left",
+      "justify-right": "Right",
+      "justify-center": "Center"
+    },
+    "group": "Typography"
+  },
+  "fitContent": {
+    "label": "Message Width",
+    "type": "dropdown",
+    "value": "Shrink",
+    "options": {
+      "fit-content": "Shrink",
+      "fill-width": "Fill"
     },
     "group": "Typography"
   },
@@ -202,7 +229,7 @@
   },
   "widgetName": {
     "type": "hidden",
-    "value": "Final Fantasy Chat"
+    "value": "Super Mario RPG Chat"
   },
   "widgetAuthor": {
     "type": "hidden",
