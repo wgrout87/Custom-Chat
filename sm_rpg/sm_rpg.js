@@ -65,7 +65,6 @@ function getFontCoordinatesObj() {
             col++
         }
     })
-    console.log(charactersObj);
     return;
 };
 
@@ -193,7 +192,7 @@ window.addEventListener('onWidgetLoad', function (obj) {
     version = fieldData.version;
     fontSize = fieldData.fontSize;
     usernameRatio = fieldData.usernameRatio;
-    scale = fontSize / fontSettings[version].characterWidth;
+    scale = fontSize / fontSettings[version].characterHeight;
     characterHeight = fontSettings[version].characterHeight;
     characterWidth = fontSettings[version].characterWidth;
     typewriter = fieldData.typewriter;
