@@ -20,13 +20,42 @@ const fontSettings = {
     },
 }
 
+function getRowYRef(row) {
+    switch (row) {
+        case 0:
+            return 0;
+        case 1:
+            return 14;
+        case 2:
+            return 30;
+        case 3:
+            return 45;
+        case 4:
+            return 59;
+        case 5:
+            return 74;
+        case 6:
+            return 89;
+        case 7:
+            return 104;
+        case 8:
+            return 119;
+        case 9:
+            return 134;
+        case 10:
+            return 149;
+        case 11:
+            return 164;
+    }
+}
+
 // This function assigns coordinates to each of the letters from the relevant sprite sheet. Coordinates are in terms of pixels and are the top left coordinate on the sprite sheet for the corresponding character
-function getFontCoordinatesObj(characterHeight, characterWidth) {
+function getFontCoordinatesObj() {
     const fontArr = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\u007F".split('');
     let row = 0;
     let col = 0;
     fontArr.forEach(character => {
-        charactersObj[character] = [row * characterHeight, col * characterWidth];
+        charactersObj[character] = [getRowYRef(row), col * characterWidth];
         // column 7 is the 8th (last) character in a row, after that, the row should advance, and the column return to the beginning for the new row
         if (col === 7) {
             row++;
@@ -36,6 +65,7 @@ function getFontCoordinatesObj(characterHeight, characterWidth) {
             col++
         }
     })
+    console.log(charactersObj);
     return;
 };
 
@@ -51,7 +81,7 @@ function convertFont(text, desiredSize, username = false) {
     const hidden = !username && text !== " " && typewriter === "true" ? "hidden" : ""
     let result = textCharacters.map(character => {
         const characterInfo = charactersObj[character];
-        return characterInfo ? `<div class="character ${hidden}" style="display: inline-block; width: ${characterWidth}px; height: ${characterHeight}px; background: url(${fontUrl}) -${characterInfo[1]}px -${characterInfo[0] - 2}px; image-rendering: crisp-edges; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>` : `<div class="character" style="display: inline-block; width: ${characterWidth}px; height: ${characterHeight}px; background: url(${fontUrl}) -${charactersObj["*"][1]}px -${charactersObj["*"][0]}px; image-rendering: crisp-edges;; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>`;
+        return characterInfo ? `<div class="character ${hidden}" style="display: inline-block; width: ${characterWidth}px; height: ${characterHeight}px; background: url(${fontUrl}) -${characterInfo[1]}px -${characterInfo[0]}px; image-rendering: crisp-edges; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>` : `<div class="character" style="display: inline-block; width: ${characterWidth}px; height: ${characterHeight}px; background: url(${fontUrl}) -${charactersObj["*"][1]}px -${charactersObj["*"][0]}px; image-rendering: crisp-edges;; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>`;
     })
     result = result.reduce((a, c) => a + c, '');
     result = text !== " " ? `<div class="${username ? "username" : "message-text"}" style="display: inline-block; height: ${(characterWidth + 10) * scale}">${result}</div>` : result;
@@ -169,7 +199,7 @@ window.addEventListener('onWidgetLoad', function (obj) {
     typewriter = fieldData.typewriter;
     typewriterSpeed = fieldData.typewriterSpeed;
     testMessageText = fieldData.testMessageText;
-    getFontCoordinatesObj(characterHeight, characterWidth);
+    getFontCoordinatesObj();
     fetch('https://api.streamelements.com/kappa/v2/channels/' + obj.detail.channel.id + '/').then(response => response.json()).then((profile) => {
         provider = profile.provider;
     });
@@ -298,12 +328,17 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
     if (typewriter === "true") typewriterText(totalMessages);
 };
 
-function typeNextCharacter(arr) {
-    setTimeout(() => {
-        arr[0].classList.remove("hidden");
-        arr.shift()
-        if (arr.length > 0) typeNextCharacter(arr);
-    }, typewriterSpeed);
+function typeNextCharacter(arr, messageID) {
+    const mostRecentMessageID = document.querySelector('.main-container').lastChild.id;
+    if (messageID === mostRecentMessageID) {
+        setTimeout(() => {
+            arr[0].classList.remove("hidden");
+            arr.shift()
+            if (arr.length > 0) typeNextCharacter(arr, messageID);
+        }, typewriterSpeed);
+    } else {
+        arr.forEach(element => element.classList.remove("hidden"));
+    }
 };
 
 function typewriterText(messageID) {
@@ -314,7 +349,7 @@ function typewriterText(messageID) {
         }
         return element;
     }).flat();
-    typeNextCharacter(brokenDownMessage);
+    typeNextCharacter(brokenDownMessage, `msg-${messageID}`);
 };
 
 function removeRow() {
