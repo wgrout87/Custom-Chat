@@ -39,13 +39,13 @@ function getRowYRef(row) {
         case 7:
             return 106;
         case 8:
-            return 121;
+            return 122;
         case 9:
-            return 136;
+            return 137;
         case 10:
             return 151;
         case 11:
-            return 166;
+            return 167;
     }
 }
 
@@ -55,7 +55,9 @@ function getFontCoordinatesObj() {
     let row = 0;
     let col = 0;
     fontArr.forEach(character => {
-        charactersObj[character] = [getRowYRef(row), col * characterWidth];
+        let rowYRef = getRowYRef(row)
+        if (/[,<>;]/.test(character)) rowYRef -= 1;
+        charactersObj[character] = [rowYRef, col * characterWidth];
         // column 7 is the 8th (last) character in a row, after that, the row should advance, and the column return to the beginning for the new row
         if (col === 7) {
             row++;
