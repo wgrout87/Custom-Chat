@@ -23,7 +23,7 @@ const fontSettings = {
 function getRowYRef(row) {
     switch (row) {
         case 0:
-            return 0;
+            return 2;
         case 1:
             return 14;
         case 2:
@@ -81,7 +81,7 @@ function convertFont(text, desiredSize, username = false) {
     const hidden = !username && text !== " " && typewriter === "true" ? "hidden" : ""
     let result = textCharacters.map(character => {
         const characterInfo = charactersObj[character];
-        return characterInfo ? `<div class="character ${hidden}" style="display: inline-block; width: ${characterWidth}px; height: ${characterHeight}px; background: url(${fontUrl}) -${characterInfo[1]}px -${characterInfo[0]}px; image-rendering: crisp-edges; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>` : `<div class="character" style="display: inline-block; width: ${characterWidth}px; height: ${characterHeight}px; background: url(${fontUrl}) -${charactersObj["*"][1]}px -${charactersObj["*"][0]}px; image-rendering: crisp-edges;; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>`;
+        return characterInfo ? `<div class="character ${hidden}" style="display: inline-block; width: ${characterWidth}px; height: ${characterHeight}px; background: url(${fontUrl}) -${characterInfo[1]}px -${characterInfo[0] - 2}px; image-rendering: crisp-edges; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>` : `<div class="character" style="display: inline-block; width: ${characterWidth}px; height: ${characterHeight}px; background: url(${fontUrl}) -${charactersObj["*"][1]}px -${charactersObj["*"][0]}px; image-rendering: crisp-edges;; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>`;
     })
     result = result.reduce((a, c) => a + c, '');
     result = text !== " " ? `<div class="${username ? "username" : "message-text"}" style="display: inline-block; height: ${(characterWidth + 10) * scale}">${result}</div>` : result;
