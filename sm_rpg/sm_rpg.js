@@ -25,27 +25,27 @@ function getRowYRef(row) {
         case 0:
             return 2;
         case 1:
-            return 14;
+            return 16;
         case 2:
-            return 30;
+            return 32;
         case 3:
-            return 45;
+            return 47;
         case 4:
-            return 59;
+            return 61;
         case 5:
-            return 74;
+            return 76;
         case 6:
-            return 89;
+            return 91;
         case 7:
-            return 104;
+            return 106;
         case 8:
-            return 119;
+            return 121;
         case 9:
-            return 134;
+            return 136;
         case 10:
-            return 149;
+            return 151;
         case 11:
-            return 164;
+            return 166;
     }
 }
 
