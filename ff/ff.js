@@ -327,6 +327,8 @@ function typeNextCharacter(arr, messageID) {
             arr.shift()
             if (arr.length > 0) typeNextCharacter(arr, messageID);
         }, typewriterSpeed);
+    } else {
+        arr.forEach(element => element.classList.remove("hidden"));
     }
 };
 
