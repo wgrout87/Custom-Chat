@@ -290,7 +290,6 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
     </div>
     </div>
     </div>`);
-    console.log(element);
     if (addition === "append") {
         if (hideAfter !== 999) {
             $(element).appendTo('.main-container').delay(hideAfter * 1000).queue(function () {
@@ -319,12 +318,16 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
     if (typewriter === "true") typewriterText(totalMessages);
 };
 
-function typeNextCharacter(arr) {
-    setTimeout(() => {
-        arr[0].classList.remove("hidden");
-        arr.shift()
-        if (arr.length > 0) typeNextCharacter(arr);
-    }, typewriterSpeed);
+function typeNextCharacter(arr, messageID) {
+    const mostRecentMessageID = document.querySelector('.main-container').lastChild.id;
+    console.log(messageID, mostRecentMessageID);
+    if (messageID === mostRecentMessageID) {
+        setTimeout(() => {
+            arr[0].classList.remove("hidden");
+            arr.shift()
+            if (arr.length > 0) typeNextCharacter(arr, messageID);
+        }, typewriterSpeed);
+    }
 };
 
 function typewriterText(messageID) {
@@ -335,7 +338,7 @@ function typewriterText(messageID) {
         }
         return element;
     }).flat();
-    typeNextCharacter(brokenDownMessage);
+    typeNextCharacter(brokenDownMessage, `msg-${messageID}`);
 };
 
 function removeRow() {
