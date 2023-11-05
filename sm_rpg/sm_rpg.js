@@ -1,4 +1,4 @@
-let totalMessages = 0, messagesLimit = 0, removeSelector, addition, channelName, provider, version, fontSize, usernameRatio, scale, characterHeight, characterWidth, typewriter = 'true', typewriterSpeed = 100;
+let totalMessages = 0, messagesLimit = 0, removeSelector, addition, channelName, provider, version, fontSize, usernameRatio, scale, characterHeight, characterWidth, typewriter = 'true', typewriterSpeed = 100, testMessageText;
 let animationIn = 'bounceIn';
 let animationOut = 'bounceOut';
 let hideAfter = 60;
@@ -100,7 +100,7 @@ window.addEventListener('onEventReceived', function (obj) {
                                 description: "Verified"
                             }],
                             channel: channelName,
-                            text: "Howdy! My name is Bill and I am here to serve Kappa",
+                            text: testMessageText,
                             isAction: !1,
                             emotes: [{
                                 type: "twitch",
@@ -168,6 +168,7 @@ window.addEventListener('onWidgetLoad', function (obj) {
     characterWidth = fontSettings[version].characterWidth;
     typewriter = fieldData.typewriter;
     typewriterSpeed = fieldData.typewriterSpeed;
+    testMessageText = fieldData.testMessageText;
     getFontCoordinatesObj(characterHeight, characterWidth);
     fetch('https://api.streamelements.com/kappa/v2/channels/' + obj.detail.channel.id + '/').then(response => response.json()).then((profile) => {
         provider = profile.provider;
@@ -257,7 +258,7 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
     const emotesOnly = /emotesOnly/gm.test(message);
     const messageClass = emotesOnly ? "centered" : "";
     const element = $.parseHTML(`
-    <div data-sender="${uid}" data-msgid="${msgId}" class="message-row {animationIn} animated" id="msg-${totalMessages}">
+    <div data-sender="${uid}" data-msgid="${msgId}" class="message-row {animationIn} animated {justifyMessages} {fitContent}" id="msg-${totalMessages}">
     <div class="border ${borderVersion}">        
     <div class="user-box ${actionClass}">${badges}${convertFont(username, (scale * usernameRatio), true)}</div>
     <div class="user-message ${actionClass}">
