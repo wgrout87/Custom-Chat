@@ -1,4 +1,4 @@
-let totalMessages = 0, messagesLimit = 0, removeSelector, addition, channelName, provider, version, fontSize, usernameRatio, scale, characterHeight, characterWidth, typewriter = 'true', typewriterSpeed = 100, testMessageText;
+let totalMessages = 0, messagesLimit = 0, removeSelector, addition, channelName, provider, version, fontSize, usernameRatio, scale, characterHeight, characterWidth, typewriter = 'true', typewriterSpeed = 100, testMessageText, alignMessages;
 let animationIn = 'bounceIn';
 let animationOut = 'bounceOut';
 let hideAfter = 60;
@@ -198,11 +198,12 @@ window.addEventListener('onWidgetLoad', function (obj) {
     typewriter = fieldData.typewriter;
     typewriterSpeed = fieldData.typewriterSpeed;
     testMessageText = fieldData.testMessageText;
+    alignMessages = fieldData.alignMessages;
     getFontCoordinatesObj();
     fetch('https://api.streamelements.com/kappa/v2/channels/' + obj.detail.channel.id + '/').then(response => response.json()).then((profile) => {
         provider = profile.provider;
     });
-    if (fieldData.alignMessages === "block") {
+    if (alignMessages === "block") {
         addition = "prepend";
         removeSelector = ".message-row:nth-child(n+" + (messagesLimit + 1) + ")"
     } else {
@@ -328,7 +329,7 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
 };
 
 function typeNextCharacter(arr, messageID) {
-    const mostRecentMessageID = document.querySelector('.main-container').lastChild.id;
+    const mostRecentMessageID = alignMessages === "flex" ? document.querySelector('.main-container').lastChild.id : document.querySelector('.main-container > div:first-of-type').id;
     if (messageID === mostRecentMessageID) {
         setTimeout(() => {
             arr[0].classList.remove("hidden");
