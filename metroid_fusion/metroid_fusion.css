@@ -93,6 +93,10 @@
   border-style: solid;
 }
 
+.standard-right {
+  border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/metroid_fusion_border_right.png");
+}
+
 .frame-border {
   border-width: 20px;
   border-image-slice: 24 24 17 24;
@@ -101,6 +105,10 @@
   border-image-repeat: round round;
   border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/metroid_fusion_frame_border.png");
   border-style: solid;
+}
+
+.frame-right {
+  border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/metroid_fusion_frame_border_right.png");
 }
 
 .centered {
