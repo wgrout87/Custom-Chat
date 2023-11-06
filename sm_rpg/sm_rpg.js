@@ -41,11 +41,11 @@ function getRowYRef(row) {
         case 8:
             return 122;
         case 9:
-            return 137;
+            return 138;
         case 10:
-            return 151;
+            return 153;
         case 11:
-            return 167;
+            return 169;
     }
 }
 
