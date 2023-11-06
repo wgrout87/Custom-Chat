@@ -1,0 +1,125 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css');
+@import url('https://unpkg.com/nes.css/css/nes.css');
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
+
+* {
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+    overflow: hidden;
+    font-weight: {{fontWeight}};
+    background-color: transparent !important;
+}
+
+.main-container{
+    display:{{alignMessages}};
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    align-content: flex-start;
+    height:98%;
+    margin-bottom:10px;
+    box-sizing: border-box;
+}
+
+.message-row{
+    flex: 0 0 auto;
+    margin-bottom: 5px;
+    padding:5px;
+    vertical-align: baseline;
+}
+
+.fill-width{
+  width: 100%;
+}
+
+.justify-right{
+  margin-left: auto !important;
+  margin-right: 0 !important;
+}
+
+.justify-center{
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.badge{
+    margin-right: calc({{fontSize}}px * -2/3);
+    display:{{displayBadges}};
+    height: calc({{fontSize}}px * {{usernameRatio}});
+}
+
+.user-box{
+    display:inline;
+    font-size:{{fontSize}}px;
+    position: relative;
+}
+
+.username {
+    vertical-align: middle;
+}
+
+.user-message{
+    display:inline;
+    font-size:{{fontSize}}px;
+    word-wrap: break-word;
+}
+
+.block {
+    display: block;
+}
+
+.emote{
+    display: inline-block;
+    height: {{emoteSize}}px;
+    vertical-align: baseline;
+    background-repeat:no-repeat;
+}
+
+.loneEmote{
+    height: calc({{emoteSize}}px * 2);
+}
+
+.action{
+    font-style: italic;
+}
+
+.standard-border {
+  border-width: 30px;
+  border-image-slice: 16 32 16 32 fill;
+  border-image-width: 30px 52px 30px 52px;
+  border-image-outset: 0px 0px 0px 0px;
+  border-image-repeat: repeat repeat;
+  border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/metroid_fusion_border.png");
+  border-style: solid;
+}
+
+.standard-right {
+  border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/metroid_fusion_border_right.png");
+}
+
+.frame-border {
+  border-width: 20px;
+  border-image-slice: 24 24 17 24;
+  border-image-width: 40px 40px 40px 40px;
+  border-image-outset: 0px 0px 0px 0px;
+  border-image-repeat: round round;
+  border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/metroid_fusion_frame_border.png");
+  border-style: solid;
+}
+
+.frame-right {
+  border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/metroid_fusion_frame_border_right.png");
+}
+
+.centered {
+    margin: 0 auto !important;
+  	width: fit-content;
+}
+
+.w-auto {
+    width: auto;
+}
+
+.hidden {
+  opacity: 0;
+}
