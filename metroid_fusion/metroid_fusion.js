@@ -258,8 +258,8 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
     }
 
     let borderVersion = version + "-border";
-    console.log(borderOrientation);
-    if (borderOrientation === "right") borderVersion += ` ${version}-right`;
+    if (borderOrientation === "right") borderVersion += ` {version}-right`;
+    console.log(borderVersion);
     const emotesOnly = /emotesOnly/gm.test(message);
     const messageClass = emotesOnly ? "centered" : "";
     const element = $.parseHTML(`
