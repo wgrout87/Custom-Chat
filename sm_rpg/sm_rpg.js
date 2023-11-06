@@ -54,13 +54,14 @@ function getFontCoordinatesObj() {
     const fontArr = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\u007F".split('');
     let row = 0;
     let col = 0;
+    let rowYRef = getRowYRef(row);
     fontArr.forEach(character => {
-        let rowYRef = getRowYRef(row)
         if (/[,<>;]/.test(character)) rowYRef -= 1;
         charactersObj[character] = [rowYRef, col * characterWidth];
         // column 7 is the 8th (last) character in a row, after that, the row should advance, and the column return to the beginning for the new row
         if (col === 7) {
             row++;
+            rowYRef = getRowYRef(row)
             col = 0;
         } else {
             // if there is still space in the current row, the column only should advance
@@ -291,7 +292,7 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
     const messageClass = emotesOnly ? "centered" : "";
     const element = $.parseHTML(`
     <div data-sender="${uid}" data-msgid="${msgId}" class="message-row {animationIn} animated {justifyMessages} {fitContent}" id="msg-${totalMessages}">
-    <div class="border ${borderVersion}">        
+    <div class="${borderVersion}">        
     <div class="user-box ${actionClass}">${badges}${convertFont(username, (scale * usernameRatio), true)}</div>
     <div class="user-message ${actionClass}">
     <div class="block w-auto">
