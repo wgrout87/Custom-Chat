@@ -21,6 +21,16 @@
     },
     "group": "Version"
   },
+  "borderOrientation": {
+    "label": "Version",
+    "type": "dropdown",
+    "value": "standard",
+    "options": {
+      "standard": "Standard",
+      "right": "Flipped"
+    },
+    "group": "Version"
+  },
   "font": {
     "label": "Font",
     "type": "dropdown",
