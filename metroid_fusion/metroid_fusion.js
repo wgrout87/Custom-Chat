@@ -1,4 +1,4 @@
-let totalMessages = 0, messagesLimit = 0, removeSelector, addition, channelName, provider, version, font, fontSize, usernameRatio, scale, characterHeight, characterWidth, typewriter = 'true', typewriterSpeed = 100, testMessageText, alignMessages;
+let totalMessages = 0, messagesLimit = 0, removeSelector, addition, channelName, provider, version, font, borderOrientation, fontSize, usernameRatio, scale, characterHeight, characterWidth, typewriter = 'true', typewriterSpeed = 100, testMessageText, alignMessages;
 let animationIn = 'bounceIn';
 let animationOut = 'bounceOut';
 let hideAfter = 60;
@@ -163,6 +163,7 @@ window.addEventListener('onWidgetLoad', function (obj) {
     version = fieldData.version;
     font = fieldData.font;
     fontSize = fieldData.fontSize;
+    borderOrientation = fieldData.borderOrientation;
     usernameRatio = fieldData.usernameRatio;
     scale = fontSize / fontSettings[font].characterHeight;
     characterHeight = fontSettings[font].characterHeight;
@@ -256,7 +257,9 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
         actionClass = "action";
     }
 
-    const borderVersion = version + "-border";
+    let borderVersion = version + "-border";
+    console.log(borderOrientation);
+    if (borderOrientation === "right") borderVersion += ` ${version}-right`;
     const emotesOnly = /emotesOnly/gm.test(message);
     const messageClass = emotesOnly ? "centered" : "";
     const element = $.parseHTML(`

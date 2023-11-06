@@ -22,7 +22,7 @@
     "group": "Version"
   },
   "borderOrientation": {
-    "label": "Version",
+    "label": "Border Orientation",
     "type": "dropdown",
     "value": "standard",
     "options": {
