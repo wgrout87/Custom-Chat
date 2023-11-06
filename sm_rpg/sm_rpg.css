@@ -102,11 +102,20 @@
 
 .pipe-border {
   border: {{borderSize}}px solid;
-  border-top-width: calc({{borderSize}}px * 1.2);
-  border-image-slice: 25 17 17 17 fill;
+  border-right-width: calc({{borderSize}}px * 1.2);
+  border-image-slice: 17 25 17 17 fill;
   border-image-repeat: stretch stretch;
   image-rendering: pixelated;
   border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/smrpg_pipe_border.png");
+}
+
+.pipe-border-right {
+  border: {{borderSize}}px solid;
+  border-left-width: calc({{borderSize}}px * 1.2);
+  border-image-slice: 17 17 17 25 fill;
+  border-image-repeat: stretch stretch;
+  image-rendering: pixelated;
+  border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/smrpg_pipe_border_right.png");
 }
 
 .hidden {

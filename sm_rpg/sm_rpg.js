@@ -1,4 +1,4 @@
-let totalMessages = 0, messagesLimit = 0, removeSelector, addition, channelName, provider, version, fontSize, usernameRatio, scale, characterHeight, characterWidth, typewriter = 'true', typewriterSpeed = 100, testMessageText, alignMessages;
+let totalMessages = 0, messagesLimit = 0, removeSelector, addition, channelName, provider, version, fontSize, usernameRatio, scale, characterHeight, characterWidth, typewriter = 'true', typewriterSpeed = 100, testMessageText, alignMessages, justifyMessages;
 let animationIn = 'bounceIn';
 let animationOut = 'bounceOut';
 let hideAfter = 60;
@@ -202,6 +202,7 @@ window.addEventListener('onWidgetLoad', function (obj) {
     typewriterSpeed = fieldData.typewriterSpeed;
     testMessageText = fieldData.testMessageText;
     alignMessages = fieldData.alignMessages;
+    justifyMessages = fieldData.justifyMessages;
     getFontCoordinatesObj();
     fetch('https://api.streamelements.com/kappa/v2/channels/' + obj.detail.channel.id + '/').then(response => response.json()).then((profile) => {
         provider = profile.provider;
@@ -287,7 +288,8 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
         actionClass = "action";
     }
 
-    const borderVersion = version + "-border";
+    let borderVersion = version + "-border";
+    if (justifyMessages === "justify-right") borderVersion += "-right";
     const emotesOnly = /emotesOnly/gm.test(message);
     const messageClass = emotesOnly ? "centered" : "";
     const element = $.parseHTML(`
