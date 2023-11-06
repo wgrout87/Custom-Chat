@@ -83,7 +83,8 @@
     font-style: italic;
 }
 
-.border {
+.standard-border {
+  border-width: 30px;
   border-image-slice: 16 32 16 32 fill;
   border-image-width: 30px 52px 30px 52px;
   border-image-outset: 0px 0px 0px 0px;
@@ -93,12 +94,13 @@
 }
 
 .frame-border {
+  border-width: 20px;
   border-image-slice: 24 24 17 24;
-border-image-width: 40px 40px 40px 40px;
-border-image-outset: 0px 0px 0px 0px;
-border-image-repeat: round round;
-border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/metroid_fusion_frame_border.png");
-border-style: solid;
+  border-image-width: 40px 40px 40px 40px;
+  border-image-outset: 0px 0px 0px 0px;
+  border-image-repeat: round round;
+  border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/metroid_fusion_frame_border.png");
+  border-style: solid;
 }
 
 .centered {

@@ -1,4 +1,4 @@
-let totalMessages = 0, messagesLimit = 0, removeSelector, addition, channelName, provider, version, fontSize, usernameRatio, scale, characterHeight, characterWidth, typewriter = 'true', typewriterSpeed = 100, testMessageText, alignMessages, justifyMessages;
+let totalMessages = 0, messagesLimit = 0, removeSelector, addition, channelName, provider, version, font, fontSize, usernameRatio, scale, characterHeight, characterWidth, typewriter = 'true', typewriterSpeed = 100, testMessageText, alignMessages;
 let animationIn = 'bounceIn';
 let animationOut = 'bounceOut';
 let hideAfter = 60;
@@ -9,59 +9,27 @@ let charactersObj = {};
 // An object consisting of all the font settings for the text box versions available. Character width and height is based on the sprite sheets
 const fontSettings = {
     "standard": {
-        url: "https://wgrout87.github.io/Custom-Chat/assets/fonts/smrpg_light_font.png",
-        characterHeight: 15,
+        url: "https://wgrout87.github.io/Custom-Chat/assets/fonts/metroid_fusion_font.png",
         characterWidth: 8,
+        characterHeight: 16,
     },
-    "pipe": {
-        url: "https://wgrout87.github.io/Custom-Chat/assets/fonts/smrpg_dark_font.png",
-        characterHeight: 15,
+    "outline": {
+        url: "https://wgrout87.github.io/Custom-Chat/assets/fonts/metroid_fusion_outline_font.png",
         characterWidth: 8,
-    },
-}
-
-function getRowYRef(row) {
-    switch (row) {
-        case 0:
-            return 0;
-        case 1:
-            return 16;
-        case 2:
-            return 33;
-        case 3:
-            return 48;
-        case 4:
-            return 61;
-        case 5:
-            return 76;
-        case 6:
-            return 91;
-        case 7:
-            return 106;
-        case 8:
-            return 122;
-        case 9:
-            return 138;
-        case 10:
-            return 153;
-        case 11:
-            return 169;
+        characterHeight: 16,
     }
 }
 
 // This function assigns coordinates to each of the letters from the relevant sprite sheet. Coordinates are in terms of pixels and are the top left coordinate on the sprite sheet for the corresponding character
-function getFontCoordinatesObj() {
+function getFontCoordinatesObj(characterHeight, characterWidth) {
     const fontArr = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\u007F".split('');
     let row = 0;
     let col = 0;
-    let rowYRef = getRowYRef(row);
     fontArr.forEach(character => {
-        if (/[,<>;]/.test(character)) rowYRef -= 1;
-        charactersObj[character] = [rowYRef, col * characterWidth];
+        charactersObj[character] = [row * characterHeight, col * characterWidth];
         // column 7 is the 8th (last) character in a row, after that, the row should advance, and the column return to the beginning for the new row
         if (col === 7) {
             row++;
-            rowYRef = getRowYRef(row)
             col = 0;
         } else {
             // if there is still space in the current row, the column only should advance
@@ -78,7 +46,7 @@ function convertFont(text, desiredSize, username = false) {
         .replaceAll('&#34;', '"')
         .replaceAll('&#62;', '>')
         .replaceAll('&#94;', '^');
-    const fontUrl = fontSettings[version].url;
+    const fontUrl = fontSettings[font].url;
     const textCharacters = text.split('');
     const hidden = !username && text !== " " && typewriter === "true" ? "hidden" : ""
     let result = textCharacters.map(character => {
@@ -86,7 +54,7 @@ function convertFont(text, desiredSize, username = false) {
         return characterInfo ? `<div class="character ${hidden}" style="display: inline-block; width: ${characterWidth}px; height: ${characterHeight}px; background: url(${fontUrl}) -${characterInfo[1]}px -${characterInfo[0]}px; image-rendering: crisp-edges; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>` : `<div class="character" style="display: inline-block; width: ${characterWidth}px; height: ${characterHeight}px; background: url(${fontUrl}) -${charactersObj["*"][1]}px -${charactersObj["*"][0]}px; image-rendering: crisp-edges;; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>`;
     })
     result = result.reduce((a, c) => a + c, '');
-    result = text !== " " ? `<div class="${username ? "username" : "message-text"}" style="display: inline-block; height: ${(characterWidth + 10) * scale}">${result}</div>` : result;
+    result = text !== " " ? `<div class="${username ? "username" : "message-text"}" style="display: inline-block; height: ${(characterHeight + 10) * scale}">${result}</div>` : result
     return result;
 }
 
@@ -193,17 +161,17 @@ window.addEventListener('onWidgetLoad', function (obj) {
     hideCommands = fieldData.hideCommands;
     channelName = obj.detail.channel.username;
     version = fieldData.version;
+    font = fieldData.font;
     fontSize = fieldData.fontSize;
     usernameRatio = fieldData.usernameRatio;
-    scale = fontSize / fontSettings[version].characterHeight;
-    characterHeight = fontSettings[version].characterHeight;
-    characterWidth = fontSettings[version].characterWidth;
+    scale = fontSize / fontSettings[font].characterHeight;
+    characterHeight = fontSettings[font].characterHeight;
+    characterWidth = fontSettings[font].characterWidth;
     typewriter = fieldData.typewriter;
     typewriterSpeed = fieldData.typewriterSpeed;
     testMessageText = fieldData.testMessageText;
-    alignMessages = fieldData.alignMessages;
-    justifyMessages = fieldData.justifyMessages;
-    getFontCoordinatesObj();
+    alignMessages = fieldData.alignMessages
+    getFontCoordinatesObj(characterHeight, characterWidth);
     fetch('https://api.streamelements.com/kappa/v2/channels/' + obj.detail.channel.id + '/').then(response => response.json()).then((profile) => {
         provider = profile.provider;
     });
@@ -288,9 +256,7 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
         actionClass = "action";
     }
 
-    let borderVersion = version + "-border";
-    if (justifyMessages === "justify-right") borderVersion += "-right";
-    if (justifyMessages === "justify-center") borderVersion += "-center";
+    const borderVersion = version + "-border";
     const emotesOnly = /emotesOnly/gm.test(message);
     const messageClass = emotesOnly ? "centered" : "";
     const element = $.parseHTML(`
