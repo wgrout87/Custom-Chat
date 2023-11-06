@@ -118,6 +118,15 @@
   border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/smrpg_pipe_border_right.png");
 }
 
+.pipe-border-center {
+  border: {{borderSize}}px solid;
+  border-top-width: calc({{borderSize}}px * 1.2);
+  border-image-slice: 25 17 17 17 fill;
+  border-image-repeat: stretch stretch;
+  image-rendering: pixelated;
+  border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/smrpg_pipe_border_center.png");
+}
+
 .hidden {
   opacity: 0;
 }

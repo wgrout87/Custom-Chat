@@ -290,6 +290,7 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
 
     let borderVersion = version + "-border";
     if (justifyMessages === "justify-right") borderVersion += "-right";
+    if (justifyMessages === "justify-center") borderVersion += "-center";
     const emotesOnly = /emotesOnly/gm.test(message);
     const messageClass = emotesOnly ? "centered" : "";
     const element = $.parseHTML(`
