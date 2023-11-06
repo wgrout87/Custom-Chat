@@ -224,7 +224,7 @@
   "typewriterSpeed": {
     "type": "number",
     "label": "Typewriter Speed (in milliseconds)",
-    "value": 100,
+    "value": 35,
     "group": "Settings"
   },
   "widgetName": {
