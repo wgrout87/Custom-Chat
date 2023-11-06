@@ -10,8 +10,8 @@ let charactersObj = {};
 const fontSettings = {
     "standard": {
         url: "https://wgrout87.github.io/Custom-Chat/assets/fonts/gsun_font.png",
-        characterWidth: 8,
-        characterHeight: 16,
+        characterWidth: 12,
+        characterHeight: 11,
     }
 }
 
