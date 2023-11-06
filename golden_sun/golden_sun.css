@@ -85,30 +85,12 @@
 
 .standard-border {
   border-width: 30px;
-  border-image-slice: 16 32 16 32 fill;
-  border-image-width: 30px 52px 30px 52px;
-  border-image-outset: 0px 0px 0px 0px;
+  border-image-slice: 8 8 8 8 fill;
+  border-image-width: 20px 20px 20px 20px;
+  border-image-outset:     0px 0px 0px 0px;
   border-image-repeat: repeat repeat;
-  border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/metroid_fusion_border.png");
+  border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/gsun_border.png");
   border-style: solid;
-}
-
-.standard-right {
-  border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/metroid_fusion_border_right.png");
-}
-
-.frame-border {
-  border-width: 20px;
-  border-image-slice: 24 24 17 24;
-  border-image-width: 40px 40px 40px 40px;
-  border-image-outset: 0px 0px 0px 0px;
-  border-image-repeat: round round;
-  border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/metroid_fusion_frame_border.png");
-  border-style: solid;
-}
-
-.frame-right {
-  border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/metroid_fusion_frame_border_right.png");
 }
 
 .centered {

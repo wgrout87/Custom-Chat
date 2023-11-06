@@ -1,4 +1,4 @@
-let totalMessages = 0, messagesLimit = 0, removeSelector, addition, channelName, provider, version, font, borderOrientation, fontSize, usernameRatio, scale, characterHeight, characterWidth, typewriter = 'true', typewriterSpeed = 100, testMessageText, alignMessages;
+let totalMessages = 0, messagesLimit = 0, removeSelector, addition, channelName, provider, version, fontSize, usernameRatio, scale, characterHeight, characterWidth, typewriter = 'true', typewriterSpeed = 100, testMessageText, alignMessages;
 let animationIn = 'bounceIn';
 let animationOut = 'bounceOut';
 let hideAfter = 60;
@@ -9,12 +9,7 @@ let charactersObj = {};
 // An object consisting of all the font settings for the text box versions available. Character width and height is based on the sprite sheets
 const fontSettings = {
     "standard": {
-        url: "https://wgrout87.github.io/Custom-Chat/assets/fonts/metroid_fusion_font.png",
-        characterWidth: 8,
-        characterHeight: 16,
-    },
-    "outline": {
-        url: "https://wgrout87.github.io/Custom-Chat/assets/fonts/metroid_fusion_outline_font.png",
+        url: "https://wgrout87.github.io/Custom-Chat/assets/fonts/gsun_font.png",
         characterWidth: 8,
         characterHeight: 16,
     }
@@ -46,7 +41,7 @@ function convertFont(text, desiredSize, username = false) {
         .replaceAll('&#34;', '"')
         .replaceAll('&#62;', '>')
         .replaceAll('&#94;', '^');
-    const fontUrl = fontSettings[font].url;
+    const fontUrl = fontSettings[version].url;
     const textCharacters = text.split('');
     const hidden = !username && text !== " " && typewriter === "true" ? "hidden" : ""
     let result = textCharacters.map(character => {
@@ -163,11 +158,10 @@ window.addEventListener('onWidgetLoad', function (obj) {
     version = fieldData.version;
     font = fieldData.font;
     fontSize = fieldData.fontSize;
-    borderOrientation = fieldData.borderOrientation;
     usernameRatio = fieldData.usernameRatio;
-    scale = fontSize / fontSettings[font].characterHeight;
-    characterHeight = fontSettings[font].characterHeight;
-    characterWidth = fontSettings[font].characterWidth;
+    scale = fontSize / fontSettings[version].characterHeight;
+    characterHeight = fontSettings[version].characterHeight;
+    characterWidth = fontSettings[version].characterWidth;
     typewriter = fieldData.typewriter;
     typewriterSpeed = fieldData.typewriterSpeed;
     testMessageText = fieldData.testMessageText;
@@ -258,7 +252,6 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
     }
 
     let borderVersion = version + "-border";
-    if (borderOrientation === "right") borderVersion += ` {version}-right`;
     console.log(borderVersion);
     const emotesOnly = /emotesOnly/gm.test(message);
     const messageClass = emotesOnly ? "centered" : "";
