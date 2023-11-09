@@ -84,7 +84,7 @@
 }
 
 .standard-border {
-  border-width: 30px;
+  border-width: {{borderSize}}px;
   border-image-slice: 8 8 8 8 fill;
   border-image-width: {{borderSize}}px;
   border-image-outset:     0px 0px 0px 0px;
