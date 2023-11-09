@@ -84,7 +84,8 @@
 }
 
 .block-border {
-    border-image-slice: 16 16 16 16;
+    border-width: {{borderSize}}px;
+    border-image-slice: 16 16 16 16 fill;
     border-image-width: {{borderSize}}px;
     border-image-outset: 0px 0px 0px 0px;
     border-image-repeat: round round;
@@ -93,30 +94,52 @@
 }
 
 .bonus-border {
-    
+    border-width: {{borderSize}}px;
+    border-image-slice: 16 16 16 16 fill;
+    border-image-width: 20px 20px 20px 20px;
+    border-image-outset: 0px 0px 0px 0px;
+    border-image-repeat: round round;
+    border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/smw_bonus_border.png");
+    border-style: solid;
 }
 
 .gold-border {
-    
+    border-width: {{borderSize}}px;
+    border-image-slice: 9 9 9 9 fill;
+    border-image-width: 20px 20px 20px 20px;
+    border-image-outset: 0px 0px 0px 0px;
+    border-image-repeat: round round;
+    border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/smw_gold_border.png");
+    border-style: solid;
 }
 
 .ground-border {
-    
+    border-width: {{borderSize}}px;
+    border-image-slice: 8 8 8 8 fill;
+    border-image-width: 20px 20px 20px 20px;
+    border-image-outset: 0px 0px 0px 0px;
+    border-image-repeat: round round;
+    border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/smw_ground_border.png");
+    border-style: solid;
 }
 
 .mesh-border {
+    border-width: {{borderSize}}px;
     
 }
 
 .pipe-border {
+    border-width: {{borderSize}}px;
     
 }
 
 .rock-border {
+    border-width: {{borderSize}}px;
     
 }
 
 .yoshi-border {
+    border-width: {{borderSize}}px;
     
 }
 
