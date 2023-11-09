@@ -84,7 +84,6 @@
 }
 
 .standard-border {
-  border-width: calc({{borderSize}}px /2);
   border-image-slice: 16 32 16 32 fill;
   border-top-width: {{borderSize}}px;
   border-right-width: calc({{borderSize}}px * 1.73);
