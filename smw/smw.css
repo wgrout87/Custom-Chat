@@ -96,7 +96,7 @@
 .bonus-border {
     border-width: {{borderSize}}px;
     border-image-slice: 16 16 16 16 fill;
-    border-image-width: 20px 20px 20px 20px;
+    border-image-width: {{borderSize}}px;
     border-image-outset: 0px 0px 0px 0px;
     border-image-repeat: round round;
     border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/smw_bonus_border.png");
@@ -106,7 +106,7 @@
 .gold-border {
     border-width: {{borderSize}}px;
     border-image-slice: 9 9 9 9 fill;
-    border-image-width: 20px 20px 20px 20px;
+    border-image-width: {{borderSize}}px;
     border-image-outset: 0px 0px 0px 0px;
     border-image-repeat: round round;
     border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/smw_gold_border.png");
@@ -116,7 +116,7 @@
 .ground-border {
     border-width: {{borderSize}}px;
     border-image-slice: 8 8 8 8 fill;
-    border-image-width: 20px 20px 20px 20px;
+    border-image-width: {{borderSize}}px;
     border-image-outset: 0px 0px 0px 0px;
     border-image-repeat: round round;
     border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/smw_ground_border.png");
@@ -125,22 +125,42 @@
 
 .mesh-border {
     border-width: {{borderSize}}px;
-    
+    border-image-slice: 5 5 5 5 fill;
+    border-image-width: {{borderSize}}px;
+    border-image-outset: 0px 0px 0px 0px;
+    border-image-repeat: stretch stretch;
+    border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/smw_mesh_border.png");
+    border-style: solid;
 }
 
 .pipe-border {
     border-width: {{borderSize}}px;
-    
+    border-image-slice: 16 16 16 16 fill;
+    border-image-width: {{borderSize}}px;
+    border-image-outset: 0px 0px 0px 0px;
+    border-image-repeat: stretch stretch;
+    border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/smw_pipe_border.png");
+    border-style: solid;
 }
 
 .rock-border {
     border-width: {{borderSize}}px;
-    
+    border-image-slice: 7 7 7 7 fill;
+    border-image-width: {{borderSize}}px;
+    border-image-outset: 0px 0px 0px 0px;
+    border-image-repeat: stretch stretch;
+    border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/smw_rock_border.png");
+    border-style: solid;
 }
 
 .yoshi-border {
     border-width: {{borderSize}}px;
-    
+    border-image-slice: 48 48 48 48 fill;
+border-image-width: {{borderSize}}px;
+border-image-outset: 0px 0px 0px 0px;
+border-image-repeat: round round;
+border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/smw_yoshi_border.png");
+border-style: solid;
 }
 
 .centered {
