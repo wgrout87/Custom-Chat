@@ -9,9 +9,9 @@ let charactersObj = {};
 // An object consisting of all the font settings for the text box versions available. Character width and height is based on the sprite sheets
 const fontSettings = {
     "standard": {
-        url: "https://wgrout87.github.io/Custom-Chat/assets/fonts/gsun_font.png",
-        characterWidth: 12,
-        characterHeight: 11,
+        url: "https://wgrout87.github.io/Custom-Chat/assets/fonts/smw_font.png",
+        characterWidth: 8,
+        characterHeight: 8,
     }
 }
 

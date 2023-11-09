@@ -56,12 +56,14 @@
 
 .username {
     vertical-align: middle;
+    image-rendering: pixelated;
 }
 
 .user-message{
     display:inline;
     font-size:{{fontSize}}px;
     word-wrap: break-word;
+    image-rendering: pixelated;
 }
 
 .block {
@@ -156,11 +158,11 @@
 .yoshi-border {
     border-width: {{borderSize}}px;
     border-image-slice: 48 48 48 48 fill;
-border-image-width: {{borderSize}}px;
-border-image-outset: 0px 0px 0px 0px;
-border-image-repeat: round round;
-border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/smw_yoshi_border.png");
-border-style: solid;
+    border-image-width: {{borderSize}}px;
+    border-image-outset: 0px 0px 0px 0px;
+    border-image-repeat: round round;
+    border-image-source: url("https://wgrout87.github.io/Custom-Chat/assets/borders/smw_yoshi_border.png");
+    border-style: solid;
 }
 
 .centered {
