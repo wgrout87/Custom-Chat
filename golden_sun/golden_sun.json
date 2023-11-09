@@ -20,6 +20,12 @@
     },
     "group": "Version"
   },
+  "borderSize": {
+    "type": "number",
+    "label": "Border Size",
+    "value": 30,
+    "group": "Version"
+  },
   "fontSize": {
     "type": "number",
     "label": "Font Size",
