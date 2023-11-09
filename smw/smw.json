@@ -16,34 +16,14 @@
     "type": "dropdown",
     "value": "standard",
     "options": {
-      "standard": "Standard",
-      "frame": "Frame"
-    },
-    "group": "Version"
-  },
-  "borderOrientation": {
-    "label": "Border Orientation",
-    "type": "dropdown",
-    "value": "standard",
-    "options": {
-      "standard": "Standard",
-      "right": "Flipped"
-    },
-    "group": "Version"
-  },
-  "borderSize": {
-    "type": "number",
-    "label": "Border Size",
-    "value": 30,
-    "group": "Version"
-  },
-  "font": {
-    "label": "Font",
-    "type": "dropdown",
-    "value": "standard",
-    "options": {
-      "standard": "Standard",
-      "outline": "Outline"
+      "block": "Block",
+      "bonus": "Bonus",
+      "gold": "Gold",
+      "ground": "Ground",
+      "mesh": "Mesh",
+      "pipe": "Pipe",
+      "rock": "Rock",
+      "yoshi": "Yoshi"
     },
     "group": "Version"
   },
