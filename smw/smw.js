@@ -41,7 +41,7 @@ function convertFont(text, desiredSize, username = false) {
         .replaceAll('&#34;', '"')
         .replaceAll('&#62;', '>')
         .replaceAll('&#94;', '^');
-    const fontUrl = fontSettings[version].url;
+    const fontUrl = fontSettings.standard.url;
     const textCharacters = text.split('');
     const hidden = !username && text !== " " && typewriter === "true" ? "hidden" : ""
     let result = textCharacters.map(character => {
@@ -159,9 +159,9 @@ window.addEventListener('onWidgetLoad', function (obj) {
     font = fieldData.font;
     fontSize = fieldData.fontSize;
     usernameRatio = fieldData.usernameRatio;
-    scale = fontSize / fontSettings[version].characterHeight;
-    characterHeight = fontSettings[version].characterHeight;
-    characterWidth = fontSettings[version].characterWidth;
+    scale = fontSize / fontSettings.standard.characterHeight;
+    characterHeight = fontSettings.standard.characterHeight;
+    characterWidth = fontSettings.standard.characterWidth;
     typewriter = fieldData.typewriter;
     typewriterSpeed = fieldData.typewriterSpeed;
     testMessageText = fieldData.testMessageText;
