@@ -49,7 +49,7 @@ function convertFont(text, desiredSize, username = false) {
         return characterInfo ? `<div class="character ${hidden}" style="display: inline-block; width: ${characterWidth}px; height: ${characterHeight}px; background: url(${fontUrl}) -${characterInfo[1]}px -${characterInfo[0]}px; image-rendering: crisp-edges; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>` : `<div class="character" style="display: inline-block; width: ${characterWidth}px; height: ${characterHeight}px; background: url(${fontUrl}) -${charactersObj["*"][1]}px -${charactersObj["*"][0]}px; image-rendering: crisp-edges;; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>`;
     })
     result = result.reduce((a, c) => a + c, '');
-    return `<div class="${username ? "username" : "message-text"}" style="display: inline-block; height: ${(characterHeight + 10) * scale}">${result}</div>`;
+    return `<div class="${username ? "username" : "message-text"} ${text === " " ? "space" : ""}" style="display: inline-block; height: ${(characterHeight + 10) * scale}">${result}</div>`;
 }
 
 window.addEventListener('onEventReceived', function (obj) {
@@ -144,11 +144,21 @@ window.addEventListener('onEventReceived', function (obj) {
     }
     let username = data.displayName + ":";
     addMessage(username, badges, message, data.isAction, data.userId, data.msgId);
-    const mostRecentMessageText = document.getElementById(`msg-${totalMessages}`).querySelector(".user-message").querySelectorAll(".message-text");
-    console.log(mostRecentMessageText);
-    const offsetHeightArr = Array.from(mostRecentMessageText).map(element => element.offsetTop);
-    console.log(offsetHeightArr);
+    findAndRemoveLeadingSpaces()
 });
+
+function findAndRemoveLeadingSpaces() {
+    const mostRecentMessageText = document.getElementById(`msg-${totalMessages}`).querySelector(".user-message").querySelectorAll(".message-text");
+    const leadingSpaces = Array.from(mostRecentMessageText).filter((element, index, arr) => {
+        if (arr[index - 1]) {
+            return element.offsetTop > arr[index - 1].offsetTop && element.classList.contains("space");
+        }
+        return false
+    });
+    if (leadingSpaces.length === 0) return;
+    leadingSpaces[0].remove();
+    findAndRemoveLeadingSpaces();
+};
 
 window.addEventListener('onWidgetLoad', function (obj) {
     const fieldData = obj.detail.fieldData;
@@ -255,7 +265,6 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
     }
 
     let borderVersion = version + "-border";
-    console.log(borderVersion);
     const emotesOnly = /emotesOnly/gm.test(message);
     const messageClass = emotesOnly ? "centered" : "";
     const element = $.parseHTML(`
