@@ -320,6 +320,7 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
         removeRow();
     }
     if (typewriter === "true") typewriterText(totalMessages);
+    if (typewriter === "false" && fadeInText === "true") removeHidden(totalMessages);
 };
 
 function typeNextCharacter(arr, messageID) {
@@ -344,6 +345,17 @@ function typewriterText(messageID) {
         return element;
     }).flat();
     setTimeout(() => typeNextCharacter(brokenDownMessage, `msg-${messageID}`), animationIn !== "none" ? 200 : 0);
+};
+
+function removeHidden(messageID) {
+    const message = document.getElementById(`msg-${messageID}`).querySelectorAll(".message-text,.emote");
+    const brokenDownMessage = Object.values(message).map(element => {
+        if (element.tagName === 'DIV') {
+            return Object.values(element.querySelectorAll(".character"));
+        }
+        return element;
+    }).flat();
+    setTimeout(() => brokenDownMessage.forEach(element => element.classList.remove("hidden")), animationIn !== "none" ? 200 : 0);
 };
 
 function removeRow() {
