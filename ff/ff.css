@@ -132,5 +132,21 @@
 }
 
 .fadeInText {
+  transition-property: opacity;
   transition-duration: {{fadeInTextSpeed}}ms;
+}
+
+.rising {
+  position: relative;
+  top: {{textPositionAnimationOffset}}em;
+}
+
+.falling {
+  position: relative;
+  bottom: {{textPositionAnimationOffset}}em;
+}
+
+.textPositionAnimationSpeed {
+  transition-property: position;
+  transition-duration: {{textPositionAnimationSpeed}}ms;
 }

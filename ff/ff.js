@@ -1,4 +1,4 @@
-let totalMessages = 0, messagesLimit = 0, removeSelector, addition, channelName, provider, version, fontSize, usernameRatio, scale, characterHeight, characterWidth, typewriter = 'true', typewriterSpeed = 100, fadeInText = 'false', fadeInTextSpeed = 100, testMessageText, alignMessages;
+let totalMessages = 0, messagesLimit = 0, removeSelector, addition, channelName, provider, version, fontSize, usernameRatio, scale, characterHeight, characterWidth, typewriter = 'true', typewriterSpeed = 100, fadeInText = 'false', fadeInTextSpeed = 100, textPositionAnimation = 'none', textPositionAnimationOffset, textPositionAnimationSpeed, testMessageText, alignMessages;
 let animationIn = 'bounceIn';
 let animationOut = 'bounceOut';
 let hideAfter = 60;
@@ -189,7 +189,10 @@ window.addEventListener('onWidgetLoad', function (obj) {
     typewriter = fieldData.typewriter;
     typewriterSpeed = fieldData.typewriterSpeed;
     fadeInText = fieldData.fadeInText;
-    fadeInTextSpeed = fieldData.fadeInTextSpeed
+    fadeInTextSpeed = fieldData.fadeInTextSpeed;
+    textPositionAnimation = fieldData.textPositionAnimation;
+    textPositionAnimationOffset = fieldData.textPositionAnimationOffset;
+    textPositionAnimationSpeed = fieldData.textPositionAnimationSpeed;
     testMessageText = fieldData.testMessageText;
     alignMessages = fieldData.alignMessages
     getFontCoordinatesObj(characterHeight, characterWidth);

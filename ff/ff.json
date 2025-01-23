@@ -247,6 +247,29 @@
     "value": 35,
     "group": "Settings"
   },
+  "textPositionAnimation": {
+    "label": "Text Position Animation",
+    "type": "dropdown",
+    "value": "none",
+    "options": {
+      "none": "None",
+      "up": "Rising",
+      "down": "Falling"
+    },
+    "group": "Settings"
+  },
+  "textPositionAnimationOffset": {
+    "type": "number",
+    "label": "Text Position Animation Offset (as a multiplier of the font size)",
+    "value": 0.5,
+    "group": "Settings"
+  },
+  "textPositionAnimationSpeed": {
+    "type": "number",
+    "label": "Text Position Animation Speed (in milliseconds)",
+    "value": 35,
+    "group": "Settings"
+  },
   "widgetName": {
     "type": "hidden",
     "value": "Final Fantasy Chat"
