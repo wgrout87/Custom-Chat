@@ -253,8 +253,8 @@
     "value": "none",
     "options": {
       "none": "None",
-      "up": "Rising",
-      "down": "Falling"
+      "rising": "Rising",
+      "falling": "Falling"
     },
     "group": "Settings"
   },

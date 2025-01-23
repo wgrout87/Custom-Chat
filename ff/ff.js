@@ -324,6 +324,7 @@ function addMessage(username, badges, message, isAction, uid, msgId) {
     }
     if (typewriter === "true") typewriterText(totalMessages);
     if (typewriter === "false" && fadeInText === "true") removeHidden(totalMessages);
+    if (typewriter === "false" && fadeInText === "false" && textPositionAnimation !== "none") animateTextPosition(totalMessages);
 };
 
 function typeNextCharacter(arr, messageID) {
@@ -331,11 +332,13 @@ function typeNextCharacter(arr, messageID) {
     if (messageID === mostRecentMessageID) {
         setTimeout(() => {
             arr[0].classList.remove("hidden");
-            arr.shift()
+            if (textPositionAnimation === "falling") fallingText(arr[0]);
+            arr.shift();
             if (arr.length > 0) typeNextCharacter(arr, messageID);
         }, typewriterSpeed);
     } else {
         arr.forEach(element => element.classList.remove("hidden"));
+        if (textPositionAnimation !== "none") arr.forEach(element => { if (textPositionAnimation === "falling") fallingText(element) });
     }
 };
 
@@ -358,8 +361,44 @@ function removeHidden(messageID) {
         }
         return element;
     }).flat();
-    setTimeout(() => brokenDownMessage.forEach(element => element.classList.remove("hidden")), animationIn !== "none" ? 200 : 0);
+    setTimeout(() => {
+        brokenDownMessage.forEach(element => {
+            element.classList.remove("hidden")
+            if (textPositionAnimation === "falling") fallingText(element);
+        });
+    }, animationIn !== "none" ? 200 : 0);
 };
+
+function animateTextPosition(messageID) {
+    const message = document.getElementById(`msg-${messageID}`).querySelectorAll(".message-text,.emote");
+    const brokenDownMessage = Object.values(message).map(element => {
+        if (element.tagName === 'DIV') {
+            return Object.values(element.querySelectorAll(".character"));
+        }
+        return element;
+    }).flat();
+    setTimeout(() => brokenDownMessage.forEach(element => {
+        if (textPositionAnimation === "falling") fallingText(element);
+    }), animationIn !== "none" ? 200 : 0);
+}
+
+function fallingText(el) {
+    let offset = textPositionAnimationOffset;
+    el.style.position = "relative";
+    el.style.bottom = offset + "em";
+    let interval = textPositionAnimationSpeed / 30;
+    function loop(bottomOffset) {
+        setTimeout(() => {
+            bottomOffset -= textPositionAnimationOffset / 30;
+            if (bottomOffset < 0) bottomOffset = 0;
+            el.style.bottom = bottomOffset + "em"
+            if (bottomOffset > 0) {
+                loop(bottomOffset);
+            }
+        }, interval);
+    }
+    loop(offset);
+}
 
 function removeRow() {
     if (!$(removeSelector).length) {

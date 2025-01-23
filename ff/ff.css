@@ -5,7 +5,7 @@
 * {
     font-family: 'Press Start 2P', cursive;
     color: white;
-    overflow: hidden;
+    /* overflow: hidden; */
     font-weight: {{fontWeight}};
     background-color: transparent !important;
 }
@@ -136,17 +136,25 @@
   transition-duration: {{fadeInTextSpeed}}ms;
 }
 
-.rising {
+.defaultTextPostionRising {
   position: relative;
+  top: 0px;
+}
+
+.defaultTextPostionFalling {
+  position: relative;
+  bottom: 0px;
+}
+
+.rising {
   top: {{textPositionAnimationOffset}}em;
 }
 
 .falling {
-  position: relative;
   bottom: {{textPositionAnimationOffset}}em;
 }
 
 .textPositionAnimationSpeed {
-  transition-property: position;
+  transition-property: top, bottom;
   transition-duration: {{textPositionAnimationSpeed}}ms;
 }
