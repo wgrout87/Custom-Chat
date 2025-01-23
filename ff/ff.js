@@ -333,12 +333,22 @@ function typeNextCharacter(arr, messageID) {
         setTimeout(() => {
             arr[0].classList.remove("hidden");
             if (textPositionAnimation === "falling") fallingText(arr[0]);
+            if (textPositionAnimation === "rising") risingText(arr[0]);
             arr.shift();
             if (arr.length > 0) typeNextCharacter(arr, messageID);
         }, typewriterSpeed);
     } else {
         arr.forEach(element => element.classList.remove("hidden"));
-        if (textPositionAnimation !== "none") arr.forEach(element => { if (textPositionAnimation === "falling") fallingText(element) });
+        if (textPositionAnimation !== "none") arr.forEach(element => {
+            if (textPositionAnimation === "falling") {
+                element.style.position = "relative";
+                element.style.bottom = "0em";
+            };
+            if (textPositionAnimation === "rising") {
+                element.style.position = "relative";
+                element.style.top = "0em";
+            };
+        });
     }
 };
 
@@ -365,6 +375,7 @@ function removeHidden(messageID) {
         brokenDownMessage.forEach(element => {
             element.classList.remove("hidden")
             if (textPositionAnimation === "falling") fallingText(element);
+            if (textPositionAnimation === "rising") risingText(element);
         });
     }, animationIn !== "none" ? 200 : 0);
 };
@@ -379,6 +390,7 @@ function animateTextPosition(messageID) {
     }).flat();
     setTimeout(() => brokenDownMessage.forEach(element => {
         if (textPositionAnimation === "falling") fallingText(element);
+        if (textPositionAnimation === "rising") risingText(element);
     }), animationIn !== "none" ? 200 : 0);
 }
 
@@ -394,6 +406,24 @@ function fallingText(el) {
             el.style.bottom = bottomOffset + "em"
             if (bottomOffset > 0) {
                 loop(bottomOffset);
+            }
+        }, interval);
+    }
+    loop(offset);
+}
+
+function risingText(el) {
+    let offset = textPositionAnimationOffset;
+    el.style.position = "relative";
+    el.style.top = offset + "em";
+    let interval = textPositionAnimationSpeed / 30;
+    function loop(topOffset) {
+        setTimeout(() => {
+            topOffset -= textPositionAnimationOffset / 30;
+            if (topOffset < 0) topOffset = 0;
+            el.style.top = topOffset + "em"
+            if (topOffset > 0) {
+                loop(topOffset);
             }
         }, interval);
     }
