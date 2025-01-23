@@ -68,10 +68,11 @@ function convertFont(text, desiredSize, username = false) {
         .replaceAll('&#94;', '^');
     const fontUrl = fontSettings[version].url;
     const textCharacters = text.split('');
-    const hidden = !username && text !== " " && typewriter === "true" ? "hidden" : ""
+    const hidden = !username && text !== " " && (typewriter === "true" || fadeInText === "true") ? "hidden" : "";
+    const fadeInTextClass = !username && text !== " " && fadeInText === "true" ? "fadeInText" : "";
     let result = textCharacters.map(character => {
         const characterInfo = charactersObj[character];
-        return characterInfo ? `<div class="character ${hidden}" style="display: inline-block; width: ${characterWidth}px; height: ${characterHeight}px; background: url(${fontUrl}) -${characterInfo[1]}px -${characterInfo[0]}px; image-rendering: crisp-edges; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>` : `<div class="character" style="display: inline-block; width: ${characterWidth}px; height: ${characterHeight}px; background: url(${fontUrl}) -${charactersObj["*"][1]}px -${charactersObj["*"][0]}px; image-rendering: crisp-edges;; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>`;
+        return characterInfo ? `<div class="character ${hidden} ${fadeInTextClass}" style="display: inline-block; width: ${characterWidth}px; height: ${characterHeight}px; background: url(${fontUrl}) -${characterInfo[1]}px -${characterInfo[0]}px; image-rendering: crisp-edges; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>` : `<div class="character" style="display: inline-block; width: ${characterWidth}px; height: ${characterHeight}px; background: url(${fontUrl}) -${charactersObj["*"][1]}px -${charactersObj["*"][0]}px; image-rendering: crisp-edges;; transform: scale(${desiredSize}); margin: ${(desiredSize - 1) * 4}px"></div>`;
     })
     result = result.reduce((a, c) => a + c, '');
     return `<div class="${username ? "username" : "message-text"}" style="display: inline-block; height: ${(characterHeight + 10) * scale}">${result}</div>`;
