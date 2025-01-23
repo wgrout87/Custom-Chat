@@ -1,4 +1,4 @@
-let totalMessages = 0, messagesLimit = 0, removeSelector, addition, channelName, provider, version, fontSize, usernameRatio, scale, characterHeight, characterWidth, typewriter = 'true', typewriterSpeed = 100, testMessageText, alignMessages;
+let totalMessages = 0, messagesLimit = 0, removeSelector, addition, channelName, provider, version, fontSize, usernameRatio, scale, characterHeight, characterWidth, typewriter = 'true', typewriterSpeed = 100, fadeInText = 'false', fadeInTextSpeed = 100, testMessageText, alignMessages;
 let animationIn = 'bounceIn';
 let animationOut = 'bounceOut';
 let hideAfter = 60;
@@ -187,6 +187,8 @@ window.addEventListener('onWidgetLoad', function (obj) {
     characterWidth = fontSettings[version].characterWidth;
     typewriter = fieldData.typewriter;
     typewriterSpeed = fieldData.typewriterSpeed;
+    fadeInText = fieldData.fadeInText;
+    fadeInTextSpeed = fieldData.fadeInTextSpeed
     testMessageText = fieldData.testMessageText;
     alignMessages = fieldData.alignMessages
     getFontCoordinatesObj(characterHeight, characterWidth);
@@ -231,7 +233,8 @@ function attachEmotes(message) {
             if (element !== trimmedTextArr[index]) emotesOnly = false;
         })
         let emotesClasses = emotesOnly ? "emote emotesOnly" : "emote";
-        if (typewriter === "true") emotesClasses += " hidden";
+        if (typewriter === "true" || fadeInText === "true") emotesClasses += " hidden";
+        if (fadeInText === "true") emotesClasses += " fadeInText";
         if (typeof result[0] !== "undefined") {
             let url = result[0]['urls'][1];
             if (provider === "twitch") {

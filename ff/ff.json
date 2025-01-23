@@ -231,6 +231,22 @@
     "value": 35,
     "group": "Settings"
   },
+  "fadeInText": {
+    "label": "Fade In Text",
+    "type": "dropdown",
+    "value": "true",
+    "options": {
+      "true": "On",
+      "false": "Off"
+    },
+    "group": "Settings"
+  },
+  "fadeInTextSpeed": {
+    "type": "number",
+    "label": "Text Fade In Speed (in milliseconds)",
+    "value": 35,
+    "group": "Settings"
+  },
   "widgetName": {
     "type": "hidden",
     "value": "Final Fantasy Chat"
